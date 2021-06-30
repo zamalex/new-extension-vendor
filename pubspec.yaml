@@ -48,6 +48,11 @@ flutter:
      - assets/
      - assets/images/
      - assets/images/appoinment.png
+     - assets/images/Buy Selected@3x.png
+     - assets/images/Buy@3x.png
+     - assets/images/Calendar Selected@3x.png
+     - assets/images/Document@3x.png
+     - assets/images/Notification@3x.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
