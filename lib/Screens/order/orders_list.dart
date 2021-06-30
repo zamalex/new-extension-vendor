@@ -30,6 +30,7 @@ class _OrderListState extends State<OrderList> {
   // List<UserNotification> userNotifications = <UserNotification>(new UserNotification(id:1,title:'test title', time:'12',content:'text content',isRead: false));
   var _init = true;
   var isNotificationLoaded = true;
+  TextEditingController controller = new TextEditingController();
 
   // Future<void> getNotificationList() async {
   //   var userNotification = UserNotification();
@@ -53,12 +54,28 @@ class _OrderListState extends State<OrderList> {
   //     StaticFunctions.showErrorNote(context, Constants.SERVER_ERROR);
   //   }
   // }
+
+  onSearchTextChanged(String text) async {
+    //   _searchResult.clear();
+    //   if (text.isEmpty) {
+    //     setState(() {});
+    //     return;
+    //   }
+
+    //   _userDetails.forEach((userDetail) {
+    //     if (userDetail.firstName.contains(text) || userDetail.lastName.contains(text))
+    //       _searchResult.add(userDetail);
+    //   });
+
+    //   setState(() {});
+    // }
+  }
   Future<void> goOrdersDetails() {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => OrderDetails()),
-      );
-    }
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => OrderDetails()),
+    );
+  }
 
   @override
   void didChangeDependencies() {
@@ -109,22 +126,50 @@ class _OrderListState extends State<OrderList> {
           ),
         ),
       ),
-      body: isNotificationLoaded
-          ? ListView.builder(
-
-              itemCount: appointmeents.length,
-              itemBuilder: (context, index) => OrderWedgit(
-                  appointmeents[index].status,
-                  appointmeents[index].time,
-                  appointmeents[index].userName,
-                  appointmeents[index].serviceCode,
-                  appointmeents[index].price,
-                  ()=>goOrdersDetails()),
-
-            )
-          : Center(
-              child: CircularProgressIndicator(),
+      body: Column(
+        children: [
+          new Container(
+            color: Color.fromRGBO(118, 123, 128, 1),
+            child: new Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: new Card(
+                child: new ListTile(
+                  leading: new Icon(Icons.search),
+                  title: new TextField(
+                    controller: controller,
+                    decoration: new InputDecoration(
+                        hintText: 'Search', border: InputBorder.none),
+                    onChanged: onSearchTextChanged,
+                  ),
+                  trailing: new IconButton(
+                    icon: new Icon(Icons.cancel),
+                    onPressed: () {
+                      controller.clear();
+                      onSearchTextChanged('');
+                    },
+                  ),
+                ),
+              ),
             ),
+          ),
+          Expanded(
+            child: isNotificationLoaded
+                ? ListView.builder(
+                    itemCount: appointmeents.length,
+                    itemBuilder: (context, index) => OrderWedgit(
+                        appointmeents[index].status,
+                        appointmeents[index].time,
+                        appointmeents[index].userName,
+                        appointmeents[index].serviceCode,
+                        appointmeents[index].price,
+                        () => goOrdersDetails()),
+                  )
+                : Center(
+                    child: CircularProgressIndicator(),
+                  ),
+          ),
+        ],
+      ),
     );
   }
 }

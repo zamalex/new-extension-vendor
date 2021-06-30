@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:salon_vendor/Screens/home_screen.dart';
 import 'package:salon_vendor/vendor/text_field.dart';
 import 'package:salon_vendor/vendor/theme_button.dart';
 
@@ -10,6 +11,8 @@ class VendorLogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
     return Stack(
           alignment: Alignment.bottomCenter,
           children: <Widget>[
@@ -85,9 +88,15 @@ class _SignInWidgetState extends State<SignInWidget> with SingleTickerProviderSt
     _controller.dispose();
     super.dispose();
   }
-
+void goHome() {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => Home()),
+      );
+    }
   void _validateForm() {
    // FormUtils.hideKeyboard(context);
+      goHome();
 
     if (keyPasswordInput.currentState.validate() && keyEmailInput.currentState.validate()) {
 

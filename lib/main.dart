@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:salon_vendor/Screens/appoinment/appointment_list.dart';
 import 'package:salon_vendor/Screens/home_screen.dart';
+import 'package:salon_vendor/Screens/vendor_login.dart';
 
 import 'Screens/Notification/NotificationList.dart';
 
@@ -98,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: Home()
+        home: VendorLogin()
         // FutureBuilder<bool>(
         //   // future: true,
         //   //isAuth(),
