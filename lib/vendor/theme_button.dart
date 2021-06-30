@@ -24,7 +24,7 @@ class ThemeButton extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 10),
       width: 14,
       height: 14,
-      child: const CircularProgressIndicator(strokeWidth: 2,color: Colors.white,),
+      child: const CircularProgressIndicator(strokeWidth: 2,backgroundColor: Colors.white,),
     );
   }
 

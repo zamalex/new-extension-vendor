@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:salon_vendor/Providers/appoinment_model.dart';
 import 'package:salon_vendor/Providers/notification_model.dart';
 import 'package:salon_vendor/Providers/order_model.dart';
+import 'package:salon_vendor/Screens/order/order_details.dart';
 import 'package:salon_vendor/Widgets/notification_wedgit.dart';
 import 'package:salon_vendor/Widgets/order_wedgit.dart';
 // import 'package:takafol/Providers/constants.dart';
@@ -52,6 +53,12 @@ class _OrderListState extends State<OrderList> {
   //     StaticFunctions.showErrorNote(context, Constants.SERVER_ERROR);
   //   }
   // }
+  Future<void> goOrdersDetails() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => OrderDetails()),
+      );
+    }
 
   @override
   void didChangeDependencies() {
@@ -104,13 +111,16 @@ class _OrderListState extends State<OrderList> {
       ),
       body: isNotificationLoaded
           ? ListView.builder(
+
               itemCount: appointmeents.length,
               itemBuilder: (context, index) => OrderWedgit(
                   appointmeents[index].status,
                   appointmeents[index].time,
                   appointmeents[index].userName,
                   appointmeents[index].serviceCode,
-                  appointmeents[index].price),
+                  appointmeents[index].price,
+                  ()=>goOrdersDetails()),
+
             )
           : Center(
               child: CircularProgressIndicator(),

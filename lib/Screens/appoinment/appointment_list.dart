@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:salon_vendor/Providers/appoinment_model.dart';
 import 'package:salon_vendor/Providers/notification_model.dart';
+import 'package:salon_vendor/Screens/appoinment/appointment_details.dart';
 import 'package:salon_vendor/Widgets/notification_wedgit.dart';
 import 'package:salon_vendor/Widgets/order_wedgit.dart';
 // import 'package:takafol/Providers/constants.dart';
@@ -51,7 +52,12 @@ class _AppointmentListState extends State<AppointmentList> {
   //     StaticFunctions.showErrorNote(context, Constants.SERVER_ERROR);
   //   }
   // }
-
+Future<void> goAppoinmentDetails() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => AppointmentDetails()),
+      );
+    }
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
@@ -109,7 +115,8 @@ class _AppointmentListState extends State<AppointmentList> {
                   appointmeents[index].time,
                   appointmeents[index].userName,
                   appointmeents[index].serviceCode,
-                  appointmeents[index].price),
+                  appointmeents[index].price,
+                  ()=> goAppoinmentDetails()),
             )
           : Center(
               child: CircularProgressIndicator(),
