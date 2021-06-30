@@ -54,6 +54,7 @@ flutter:
      - assets/images/Document@3x.png
      - assets/images/Notification@3x.png
      - assets/images/hair.jpg
+     - assets/images/Calendar - Profile@3x.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

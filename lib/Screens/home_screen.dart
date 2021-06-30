@@ -41,9 +41,11 @@ class _HomeState extends State<Home> {
         items: [
           BottomNavigationBarItem(
             icon: Image.asset(
-              'assets/images/Document@3x.png',
+              'assets/images/Calendar Selected@3x.png',
               width: 32,
               height: 32,
+              color: Color.fromRGBO(118, 123, 128, 1),
+
             ),
             activeIcon: Image.asset(
               'assets/images/Calendar Selected@3x.png',
