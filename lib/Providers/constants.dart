@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:salon_vendor/Providers/user_model.dart';
 
 class Constants {
-  static const DOMAIN = "http://takaful.badee.com.sa/api/v1/";
+  static const DOMAIN = "http://salon.badee.com.sa/api/v2/";
 
   
   //Global var
   static User CURRENT_USER = User();
   static String USER_TOKEN = "";
   static String PLAYER_ID = "";
+  static Color kPrimaryColor = Color.fromRGBO(118, 123, 128, 1);
   static var HEADER = {
     "Accept": "application/json",
     // "Authorization": "bearer " + Constants.USER_TOKEN,

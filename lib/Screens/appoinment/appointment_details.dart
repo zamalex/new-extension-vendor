@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
-
+import 'package:salon_vendor/Providers/orders_model.dart';
+import 'package:salon_vendor/Providers/datetime.dart';
 class AppointmentDetails extends StatelessWidget {
+
+  Data order;
+  AppointmentDetails(this.order);
   final mGrey = const Color.fromRGBO(118, 123, 128, 1);
   final dGrey = const Color.fromRGBO(184, 189, 194, 1);
   final mYellow = const Color.fromRGBO(93, 174, 255, 1);
@@ -32,11 +36,11 @@ class AppointmentDetails extends StatelessWidget {
                     radius: 30,
                   ),
                   title: Text(
-                    'Ahlam Abullah',
+                    order.user_name,
                     style: TextStyle(color: Colors.black),
                   ),
                   subtitle: Text(
-                    'Riyadh, Saudi Arabia',
+                    'Saudi Arabia',
                     style: TextStyle(color: mGrey),
                   ),
                 ),
@@ -54,7 +58,7 @@ class AppointmentDetails extends StatelessWidget {
                   height: 5,
                 ),
                 Text(
-                  'Fake address, Riyadh, Saudi Arabia',
+                  order.user_address??'',
                   style: TextStyle(color: Colors.black),
                 ),
                 SizedBox(
@@ -94,7 +98,7 @@ class AppointmentDetails extends StatelessWidget {
                   height: 5,
                 ),
                 Text(
-                  '+966 55 391 0099',
+                  order.user_phone,
                   style: TextStyle(color: Colors.black),
                 ),
                 SizedBox(
@@ -112,7 +116,7 @@ class AppointmentDetails extends StatelessWidget {
                       color: mGrey,
                       size: 30,
                     ),
-                    'Service code. 21354596'),
+                    'Service code. ${order.id}'),
                 SizedBox(
                   height: 10,
                 ),
@@ -126,16 +130,9 @@ class AppointmentDetails extends StatelessWidget {
                 SizedBox(
                   height: 10,
                 ),
+                if(order.deliveryStatus=='pending')
                 Row(
                   children: [
-                    Expanded(
-                        child: Divider(
-                      thickness: 2,
-                      color: mYellow,
-                    )),
-                    SizedBox(
-                      width: 5,
-                    ),
                     Expanded(
                         child: Divider(
                       thickness: 2,
@@ -149,13 +146,73 @@ class AppointmentDetails extends StatelessWidget {
                       thickness: 2,
                       color: dGrey,
                     )),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Expanded(
+                        child: Divider(
+                      thickness: 2,
+                      color: dGrey,
+                    )),
                   ],
-                ),
+                )
+                else if(order.deliveryStatus=='active')
+                  Row(
+                    children: [
+                      Expanded(
+                          child: Divider(
+                            thickness: 2,
+                            color: mYellow,
+                          )),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Expanded(
+                          child: Divider(
+                            thickness: 2,
+                            color: mYellow,
+                          )),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Expanded(
+                          child: Divider(
+                            thickness: 2,
+                            color: dGrey,
+                          )),
+                    ],
+                  )
+                else if(order.deliveryStatus=='done')
+                    Row(
+                      children: [
+                        Expanded(
+                            child: Divider(
+                              thickness: 2,
+                              color: mYellow,
+                            )),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Expanded(
+                            child: Divider(
+                              thickness: 2,
+                              color: mYellow,
+                            )),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Expanded(
+                            child: Divider(
+                              thickness: 2,
+                              color: mYellow,
+                            )),
+                      ],
+                    ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Active',
+                      order.deliveryStatus,
                       style: TextStyle(color: mYellow),
                     ),
                     RichText(
@@ -165,7 +222,9 @@ class AppointmentDetails extends StatelessWidget {
                             text: ' Booked by',
                             style: TextStyle(color: mYellow)),
                         TextSpan(
-                            text: ' Wed, Nov 17',
+                            text: ' ${DateTime.parse(
+                                order.bookingDateTime.replaceAll('  ', ' '))
+                                .toLocalDateString}',
                             style: TextStyle(color: Colors.black)),
                       ],
                     ))
@@ -222,7 +281,7 @@ class AppointmentDetails extends StatelessWidget {
                       color: mGrey,
                       size: 30,
                     ),
-                    'Pay in cash'),
+                    order.paymentType),
                 SizedBox(
                   height: 10,
                 ),
@@ -250,7 +309,7 @@ class AppointmentDetails extends StatelessWidget {
                       style: TextStyle(color: Colors.black),
                     ),
                     Text(
-                      '15.00 SAR',
+                      '${order.grandTotal} SAR',
                       style: TextStyle(color: Colors.black),
                     ),
                   ],
@@ -273,7 +332,7 @@ class AppointmentDetails extends StatelessWidget {
                           color: Colors.black, fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      '15.00 SAR',
+                      '${order.grandTotal} SAR',
                       style: TextStyle(
                           color: Colors.black, fontWeight: FontWeight.bold),
                     ),

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:salon_vendor/Providers/appoinment_model.dart';
 import 'package:salon_vendor/Providers/notification_model.dart';
+import 'package:salon_vendor/Providers/orders_model.dart';
 import 'package:salon_vendor/Screens/appoinment/appointment_details.dart';
 import 'package:salon_vendor/Widgets/notification_wedgit.dart';
 import 'package:salon_vendor/Widgets/order_wedgit.dart';
@@ -17,15 +18,10 @@ class AppointmentList extends StatefulWidget {
 }
 
 class _AppointmentListState extends State<AppointmentList> {
-  List<AppointmentModel> appointmeents = [
-    AppointmentModel(
-        id: 1,
-        status: "active",
-        time: "tue, dec 20, 2020 at 15:30",
-        userName: "fatma mohamed",
-        serviceCode: "#787397",
-        price: "60.00 SAR")
+  List<Data> appointmeents = [
+
   ];
+  bool loading = false;
   TextEditingController controller = new TextEditingController();
  
   // List<UserNotification> userNotifications = <UserNotification>(new UserNotification(id:1,title:'test title', time:'12',content:'text content',isRead: false));
@@ -54,10 +50,10 @@ class _AppointmentListState extends State<AppointmentList> {
   //     StaticFunctions.showErrorNote(context, Constants.SERVER_ERROR);
   //   }
   // }
-  Future<void> goAppoinmentDetails() {
+  Future<void> goAppoinmentDetails(Data appointment) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => AppointmentDetails()),
+      MaterialPageRoute(builder: (context) => AppointmentDetails(appointment)),
     );
   }
 
@@ -96,6 +92,18 @@ class _AppointmentListState extends State<AppointmentList> {
   @override
   void initState() {
     super.initState();
+
+    setState(() {
+      loading = true;
+    });
+    ApointmentsData().getOrders(page: 1).then((value){
+      print(value.length);
+      setState(() {
+        loading = false;
+        appointmeents = value.where((element) => element.orderType=='purchase').toList();
+      });
+
+    });
     // if (Constants.USER_TOKEN == "" || Constants.USER_TOKEN == null) {
     //   WidgetsBinding.instance.addPostFrameCallback((_) async {
     //     // if Constants.USER_TOKEN != ""{
@@ -151,17 +159,13 @@ class _AppointmentListState extends State<AppointmentList> {
               ),
             ),
           ),
-          Expanded(
+         loading?Center(child: CircularProgressIndicator(),): Expanded(
             child: isNotificationLoaded
                 ? ListView.builder(
                     itemCount: appointmeents.length,
                     itemBuilder: (context, index) => OrderWedgit(
-                        appointmeents[index].status,
-                        appointmeents[index].time,
-                        appointmeents[index].userName,
-                        appointmeents[index].serviceCode,
-                        appointmeents[index].price,
-                        () => goAppoinmentDetails()),
+                        appointmeents[index],
+                        () => goAppoinmentDetails(appointmeents[index])),
                   )
                 : Center(
                     child: CircularProgressIndicator(),

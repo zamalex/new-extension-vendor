@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:salon_vendor/Providers/orders_model.dart';
 import 'package:salon_vendor/Screens/order/order_details.dart';
 import 'package:salon_vendor/Widgets/seperator_wedgit.dart';
-
+import 'package:salon_vendor/Providers/datetime.dart';
 class OrderWedgit extends StatelessWidget {
-  final String status;
-  final String time;
-  final String userName;
-  final String serviceCode;
-  final String price;
+ Data order;
   Future<void> Function() onTapFunc;
 
   OrderWedgit(
-      this.status, this.time, this.userName, this.serviceCode, this.price,this.onTapFunc);
+      this.order,this.onTapFunc);
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +36,7 @@ class OrderWedgit extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.only(right: 15.0, left: 15),
                       child: Text(
-                        serviceCode,
+                        order.id.toString(),
                         style: TextStyle(
                           color: Color.fromRGBO(26, 26, 26, 1),
                           fontFamily: "Almarai",
@@ -53,7 +50,7 @@ class OrderWedgit extends StatelessWidget {
                     padding:
                         const EdgeInsets.only(right: 15.0, left: 15, top: 10),
                     child: Text(
-                      price,
+                      order.grandTotal,
                       style: TextStyle(
                         color: Color.fromRGBO(26, 26, 26, 1),
                         fontFamily: "Almarai",
@@ -67,7 +64,7 @@ class OrderWedgit extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(right: 15.0, left: 15, top: 10),
                 child: Text(
-                  userName,
+                  order.user_name,
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     color: Color.fromRGBO(184, 189, 194, 1),
@@ -80,7 +77,7 @@ class OrderWedgit extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 16, left: 8.0, bottom: 8),
                 child: Text(
-                  time,
+                  DateTime.parse(order.bookingDateTime.replaceAll('  ', ' ')).toLocalDateString,
                   style: TextStyle(
                     color: Color.fromRGBO(26, 26, 26, 1),
                     fontFamily: "Almarai",
@@ -108,7 +105,7 @@ class OrderWedgit extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           top: 5, left: 15, right: 14, bottom: 7),
                       child: Text(
-                        status,
+                        order.deliveryStatus,
                         textAlign: TextAlign.right,
                         style: TextStyle(
                           color: Color.fromRGBO(255, 255, 255, 1),

@@ -103,12 +103,8 @@ final greyLight = Color.fromRGBO(235, 235 ,235, 1);
             onSubmitted: widget.onSubmitted,
             controller: widget.controller,
             focusNode: widget.focusNode,
-            onChanged: (String value) {
-              validate();
-              if (widget.onChanged != null) {
-                widget.onChanged(value);
-              }
-            },
+
+
             obscureText: widget.obscureText,
             keyboardType: widget.keyboardType,
             textInputAction: widget.textInputAction,
@@ -117,6 +113,7 @@ final greyLight = Color.fromRGBO(235, 235 ,235, 1);
             cursorColor: grey,
             style: TextStyle(color: grey),
             decoration: BoxDecoration(
+
               color: greyLight,
               borderRadius: BorderRadius.circular(5),
 

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:salon_vendor/Providers/appoinment_model.dart';
 import 'package:salon_vendor/Providers/notification_model.dart';
 import 'package:salon_vendor/Providers/order_model.dart';
+import 'package:salon_vendor/Providers/orders_model.dart';
 import 'package:salon_vendor/Screens/order/order_details.dart';
 import 'package:salon_vendor/Widgets/notification_wedgit.dart';
 import 'package:salon_vendor/Widgets/order_wedgit.dart';
@@ -18,15 +19,9 @@ class OrderList extends StatefulWidget {
 }
 
 class _OrderListState extends State<OrderList> {
-  List<OrderModel> appointmeents = [
-    OrderModel(
-        id: 1,
-        status: "active",
-        time: "tue, dec 20, 2020 at 15:30",
-        userName: "fatma mohamed",
-        serviceCode: "#787397",
-        price: "60.00 SAR")
-  ];
+  List<Data> appointmeents = [];
+  bool loading = false;
+
   // List<UserNotification> userNotifications = <UserNotification>(new UserNotification(id:1,title:'test title', time:'12',content:'text content',isRead: false));
   var _init = true;
   var isNotificationLoaded = true;
@@ -70,10 +65,10 @@ class _OrderListState extends State<OrderList> {
     //   setState(() {});
     // }
   }
-  Future<void> goOrdersDetails() {
+  Future<void> goOrdersDetails(Data order) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => OrderDetails()),
+      MaterialPageRoute(builder: (context) => OrderDetails(order)),
     );
   }
 
@@ -97,6 +92,19 @@ class _OrderListState extends State<OrderList> {
   @override
   void initState() {
     super.initState();
+    setState(() {
+      loading = true;
+    });
+    ApointmentsData().getOrders(page: 1).then((value){
+      loading = false;
+
+      setState(() {
+
+        appointmeents = value.where((element) => element.orderType=='purchase').toList();
+      });
+
+    });
+
     // if (Constants.USER_TOKEN == "" || Constants.USER_TOKEN == null) {
     //   WidgetsBinding.instance.addPostFrameCallback((_) async {
     //     // if Constants.USER_TOKEN != ""{
@@ -152,17 +160,13 @@ class _OrderListState extends State<OrderList> {
               ),
             ),
           ),
-          Expanded(
+          loading?Center(child: CircularProgressIndicator(),):Expanded(
             child: isNotificationLoaded
                 ? ListView.builder(
                     itemCount: appointmeents.length,
                     itemBuilder: (context, index) => OrderWedgit(
-                        appointmeents[index].status,
-                        appointmeents[index].time,
-                        appointmeents[index].userName,
-                        appointmeents[index].serviceCode,
-                        appointmeents[index].price,
-                        () => goOrdersDetails()),
+                          appointmeents[index],
+                        () => goOrdersDetails(appointmeents[index])),
                   )
                 : Center(
                     child: CircularProgressIndicator(),

@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:salon_vendor/Providers/constants.dart';
+import 'package:salon_vendor/Providers/loginmodel.dart';
 import 'package:salon_vendor/Screens/home_screen.dart';
 import 'package:salon_vendor/vendor/text_field.dart';
 import 'package:salon_vendor/vendor/theme_button.dart';
@@ -66,7 +68,7 @@ class _SignInWidgetState extends State<SignInWidget> with SingleTickerProviderSt
   AnimationController _controller;
 
   bool _showPassword = false;
-  bool _done = false;
+  bool loading = false;
 
 
   String _title;
@@ -95,24 +97,32 @@ void goHome() {
       );
     }
   void _validateForm() {
-   // FormUtils.hideKeyboard(context);
-      goHome();
+     //
 
     if (keyPasswordInput.currentState.validate() && keyEmailInput.currentState.validate()) {
+      setState(() {
+        loading=true;
+      });
+       LoginModel().loginUser(_textEmailController.text, _textPassController.text).then((value) {
+         setState(() {
+           loading=false;
+         });
 
-      /* LoginModel().loginUser(_textEmailController.text, _textPassController.text).then((value) {
-          if(value.user==null)
+         if(value.user==null)
             print('no user found');
-          else
-            print('welcome ${value.user.name}');
-      });*/
+          else {
+           goHome();
+          Constants.USER_TOKEN = value.accessToken;
+          }
+
+      });
     }
   }
 
 
   @override
   Widget build(BuildContext context) {
-    return Material(color: Colors.transparent,child: Column(
+    return Scaffold(backgroundColor: Colors.transparent,body: Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Expanded(
@@ -153,6 +163,11 @@ void goHome() {
                       await Future<dynamic>.delayed(const Duration(milliseconds: 100));
                       _textEmailController.clear();
                     },
+                    validator: (s){
+                      if(s.length<9)
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('enter valid number')));
+                      return s.length<9?'enter valid number':null;
+                    },
 
                   ),
                   const Padding(padding: EdgeInsets.only(top: 20)),
@@ -167,10 +182,16 @@ void goHome() {
                     icon: Icon(_showPassword ? Icons.visibility : Icons.visibility_off),
                     controller: _textPassController,
                     focusNode: _focusPass,
+                    validator: (s){
+                      if(s.length<6)
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('enter valid 6 chars')));
+
+                      return s.length<6?'enter 6 chars':null;
+                    },
 
                   ),
                   const Padding(padding: EdgeInsets.only(top: 20)),
-                  ThemeButton(
+                  loading?CircularProgressIndicator():ThemeButton(
                     onPressed: _validateForm,
                     text: 'Login',
                     showLoading: false,
