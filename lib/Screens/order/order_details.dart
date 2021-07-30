@@ -1,13 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:pdf/pdf.dart';
 import 'package:salon_vendor/Providers/orders_model.dart';
 import 'package:salon_vendor/Providers/datetime.dart';
+import 'package:salon_vendor/Providers/tstt.dart';
 
-class OrderDetails extends StatelessWidget {
+class OrderDetails extends StatefulWidget {
   Data order;
   OrderDetails(this.order);
+
+  @override
+  _OrderDetailsState createState() => _OrderDetailsState();
+}
+
+class _OrderDetailsState extends State<OrderDetails> {
   final mGrey = const Color.fromRGBO(118, 123, 128, 1);
+
   final dGrey = const Color.fromRGBO(184, 189, 194, 1);
+
   final mYellow = const Color.fromRGBO(255, 200, 89, 1);
+  changeStatus(String status){
+    String status='';
+    switch(widget.order.deliveryStatus){
+      case 'pending':
+        status='confirmed';
+        break;
+      case 'confirmed':
+        status='on_the_way';
+        break;
+      case 'on_the_way':
+        status='delivered';
+        break;
+      case 'delivered':
+        status='delivered';
+        break;
+      default:
+        status='delivered';
+
+    }
+
+    ApointmentsData().changeStatus(status, widget.order.id.toString()).then((value){
+
+      if(value){
+        setState(() {
+          widget.order.deliveryStatus = status;
+        });
+      }
+
+    });
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +81,7 @@ class OrderDetails extends StatelessWidget {
                     radius: 30,
                   ),
                   title: Text(
-                    order.user_name,
+                    widget.order.user_name,
                     style: TextStyle(color: Colors.black),
                   ),
                   subtitle: Text(
@@ -62,7 +103,7 @@ class OrderDetails extends StatelessWidget {
                   height: 5,
                 ),
                 Text(
-                  order.user_address ?? '',
+                  widget.order.user_address ?? '',
                   style: TextStyle(color: Colors.black),
                 ),
                 SizedBox(
@@ -73,7 +114,7 @@ class OrderDetails extends StatelessWidget {
                 ),
                 _iconText(
                     Icon(
-                      Icons.location_pin,
+                      Icons.email_outlined,
                       color: mGrey,
                       size: 30,
                     ),
@@ -93,7 +134,7 @@ class OrderDetails extends StatelessWidget {
                 ),
                 _iconText(
                     Icon(
-                      Icons.location_pin,
+                      Icons.phone_enabled_outlined,
                       color: mGrey,
                       size: 30,
                     ),
@@ -102,7 +143,7 @@ class OrderDetails extends StatelessWidget {
                   height: 5,
                 ),
                 Text(
-                  order.user_phone,
+                  widget.order.user_phone,
                   style: TextStyle(color: Colors.black),
                 ),
                 SizedBox(
@@ -116,25 +157,25 @@ class OrderDetails extends StatelessWidget {
                 ),
                 _iconText(
                     Icon(
-                      Icons.location_pin,
+                      Icons.list_alt,
                       color: mGrey,
                       size: 30,
                     ),
-                    'Shipment no. ${order.id}'),
+                    'Shipment no. ${widget.order.id}'),
                 SizedBox(
                   height: 10,
                 ),
-                _iconText(
+            /*    _iconText(
                     Icon(
-                      Icons.location_pin,
+                      Icons.list_alt,
                       color: mGrey,
                       size: 30,
                     ),
-                    'Invoice summary'),
+                    'Invoice summary'),*/
                 SizedBox(
                   height: 10,
                 ),
-                if (order.deliveryStatus == 'pending')
+                if (widget.order.deliveryStatus == 'pending')
                   Row(
                     children: [
                       Expanded(
@@ -168,7 +209,7 @@ class OrderDetails extends StatelessWidget {
                       )),
                     ],
                   )
-                else if (order.deliveryStatus == 'preparing')
+                else if (widget.order.deliveryStatus == 'confirmed')
                   Row(
                     children: [
                       Expanded(
@@ -202,7 +243,7 @@ class OrderDetails extends StatelessWidget {
                       )),
                     ],
                   )
-                else if (order.deliveryStatus == 'done')
+                else if (widget.order.deliveryStatus == 'on_the_way')
                   Row(
                     children: [
                       Expanded(
@@ -236,7 +277,7 @@ class OrderDetails extends StatelessWidget {
                       )),
                     ],
                   )
-                  else if (order.deliveryStatus == 'delivered')
+                  else if (widget.order.deliveryStatus == 'delivered')
                       Row(
                         children: [
                           Expanded(
@@ -274,7 +315,7 @@ class OrderDetails extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '${order.deliveryStatus}',
+                      '${widget.order.deliveryStatus}',
                       style: TextStyle(color: mYellow),
                     ),
                     RichText(
@@ -285,7 +326,7 @@ class OrderDetails extends StatelessWidget {
                             style: TextStyle(color: mYellow)),
                         TextSpan(
                             text: DateTime.parse(
-                                    order.bookingDateTime.replaceAll('  ', ' '))
+                                    widget.order.bookingDateTime.replaceAll('  ', ' '))
                                 .toLocalDateString,
                             style: TextStyle(color: Colors.black)),
                       ],
@@ -307,11 +348,11 @@ class OrderDetails extends StatelessWidget {
                 ),
                 _iconTextLight(
                     Icon(
-                      Icons.location_pin,
+                      Icons.account_balance_wallet_outlined,
                       color: mGrey,
                       size: 30,
                     ),
-                    order.paymentType ?? ''),
+                    widget.order.paymentType ?? ''),
                 SizedBox(
                   height: 10,
                 ),
@@ -339,7 +380,7 @@ class OrderDetails extends StatelessWidget {
                       style: TextStyle(color: Colors.black),
                     ),
                     Text(
-                      '${order.grandTotal} SAR',
+                      '${widget.order.grandTotal} SAR',
                       style: TextStyle(color: Colors.black),
                     ),
                   ],
@@ -355,7 +396,7 @@ class OrderDetails extends StatelessWidget {
                       style: TextStyle(color: Colors.black),
                     ),
                     Text(
-                      '${order.tax} SAR',
+                      '${widget.order.tax} SAR',
                       style: TextStyle(color: Colors.black),
                     ),
                   ],
@@ -378,7 +419,7 @@ class OrderDetails extends StatelessWidget {
                           color: Colors.black, fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      '${order.grandTotal} SAR',
+                      '${widget.order.grandTotal} SAR',
                       style: TextStyle(
                           color: Colors.black, fontWeight: FontWeight.bold),
                     ),
@@ -393,6 +434,11 @@ class OrderDetails extends StatelessWidget {
                         child: SizedBox(
                       height: 48,
                       child: ElevatedButton(
+                        onPressed:() async {
+                          await PrintInv.generateInvoice(widget.order,PdfPageFormat.a4);
+                          print('object');
+
+                        },
                         child: Text(
                           'Print Invoice',
                           style: TextStyle(color: mGrey),
@@ -414,6 +460,7 @@ class OrderDetails extends StatelessWidget {
                         child: SizedBox(
                       height: 48,
                       child: ElevatedButton(
+                        onPressed: (){changeStatus(widget.order.deliveryStatus);},
                         child: Text(
                           'Change Status',
                           style: TextStyle(color: Colors.white),

@@ -1,13 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:pdf/pdf.dart';
+import 'package:salon_vendor/Providers/appoinment_model.dart';
 import 'package:salon_vendor/Providers/orders_model.dart';
 import 'package:salon_vendor/Providers/datetime.dart';
-class AppointmentDetails extends StatelessWidget {
+import 'package:salon_vendor/Providers/tstt.dart';
+class AppointmentDetails extends StatefulWidget {
 
   Data order;
   AppointmentDetails(this.order);
+
+  @override
+  _AppointmentDetailsState createState() => _AppointmentDetailsState();
+}
+
+class _AppointmentDetailsState extends State<AppointmentDetails> {
+  changeStatus(String status){
+    String status='';
+    switch(widget.order.deliveryStatus){
+      case 'pending':
+        status='confirmed';
+        break;
+        case 'confirmed':
+        case 'on_the_way':
+        status='finished';
+        break;
+        case 'finished':
+        status='finished';
+        break;
+      default:
+        status='finished';
+    }
+
+    ApointmentsData().changeStatus(status, widget.order.id.toString()).then((value){
+
+      if(value){
+        setState(() {
+          widget.order.deliveryStatus = status;
+        });
+      }
+
+    });
+
+  }
+
   final mGrey = const Color.fromRGBO(118, 123, 128, 1);
+
   final dGrey = const Color.fromRGBO(184, 189, 194, 1);
+
   final mYellow = const Color.fromRGBO(93, 174, 255, 1);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +77,7 @@ class AppointmentDetails extends StatelessWidget {
                     radius: 30,
                   ),
                   title: Text(
-                    order.user_name,
+                    widget.order.user_name,
                     style: TextStyle(color: Colors.black),
                   ),
                   subtitle: Text(
@@ -58,7 +99,7 @@ class AppointmentDetails extends StatelessWidget {
                   height: 5,
                 ),
                 Text(
-                  order.user_address??'',
+                  widget.order.user_address??'',
                   style: TextStyle(color: Colors.black),
                 ),
                 SizedBox(
@@ -69,7 +110,7 @@ class AppointmentDetails extends StatelessWidget {
                 ),
                 _iconText(
                     Icon(
-                      Icons.location_pin,
+                      Icons.email_outlined,
                       color: mGrey,
                       size: 30,
                     ),
@@ -89,7 +130,7 @@ class AppointmentDetails extends StatelessWidget {
                 ),
                 _iconText(
                     Icon(
-                      Icons.location_pin,
+                      Icons.phone_enabled_outlined,
                       color: mGrey,
                       size: 30,
                     ),
@@ -98,7 +139,7 @@ class AppointmentDetails extends StatelessWidget {
                   height: 5,
                 ),
                 Text(
-                  order.user_phone,
+                  widget.order.user_phone,
                   style: TextStyle(color: Colors.black),
                 ),
                 SizedBox(
@@ -112,25 +153,25 @@ class AppointmentDetails extends StatelessWidget {
                 ),
                 _iconText(
                     Icon(
-                      Icons.location_pin,
+                      Icons.list_alt,
                       color: mGrey,
                       size: 30,
                     ),
-                    'Service code. ${order.id}'),
+                    'Service code. ${widget.order.id}'),
                 SizedBox(
                   height: 10,
                 ),
-                _iconText(
+               /* _iconText(
                     Icon(
-                      Icons.location_pin,
+                      Icons.list_alt,
                       color: mGrey,
                       size: 30,
                     ),
-                    'Invoice summary'),
+                    'Invoice summary'),*/
                 SizedBox(
                   height: 10,
                 ),
-                if(order.deliveryStatus=='pending')
+                if(widget.order.deliveryStatus=='pending')
                 Row(
                   children: [
                     Expanded(
@@ -156,7 +197,7 @@ class AppointmentDetails extends StatelessWidget {
                     )),
                   ],
                 )
-                else if(order.deliveryStatus=='active')
+                else if(widget.order.deliveryStatus=='confirmed')
                   Row(
                     children: [
                       Expanded(
@@ -182,7 +223,7 @@ class AppointmentDetails extends StatelessWidget {
                           )),
                     ],
                   )
-                else if(order.deliveryStatus=='done')
+                else if(widget.order.deliveryStatus=='finished')
                     Row(
                       children: [
                         Expanded(
@@ -212,7 +253,7 @@ class AppointmentDetails extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      order.deliveryStatus,
+                      widget.order.deliveryStatus,
                       style: TextStyle(color: mYellow),
                     ),
                     RichText(
@@ -223,7 +264,7 @@ class AppointmentDetails extends StatelessWidget {
                             style: TextStyle(color: mYellow)),
                         TextSpan(
                             text: ' ${DateTime.parse(
-                                order.bookingDateTime.replaceAll('  ', ' '))
+                                widget.order.bookingDateTime.replaceAll('  ', ' '))
                                 .toLocalDateString}',
                             style: TextStyle(color: Colors.black)),
                       ],
@@ -233,21 +274,21 @@ class AppointmentDetails extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                ListTile(
+              if(widget.order.booking_staff_name!=null)  ListTile(
                   contentPadding: EdgeInsets.symmetric(horizontal: 0),
                   leading: CircleAvatar(
                     backgroundColor: Colors.grey,
                     radius: 30,
                   ),
                   title: Text(
-                    'AMohamed',
+                    '${widget.order.booking_staff_name}',
                     style: TextStyle(color: Colors.black),
                   ),
                   subtitle: Text(
-                    'Pro barber',
+                    'Salon staff',
                     style: TextStyle(color: mGrey),
                   ),
-                  trailing: ElevatedButton.icon(
+                 /* trailing: ElevatedButton.icon(
                     onPressed: null,
                     icon: Text(
                       '4.8',
@@ -257,7 +298,7 @@ class AppointmentDetails extends StatelessWidget {
                       Icons.star,
                       color: Colors.black,
                     ),
-                  ),
+                  ),*/
                 ),
                 SizedBox(
                   height: 20,
@@ -277,11 +318,11 @@ class AppointmentDetails extends StatelessWidget {
                 ),
                 _iconTextLight(
                     Icon(
-                      Icons.location_pin,
+                      Icons.account_balance_wallet_outlined,
                       color: mGrey,
                       size: 30,
                     ),
-                    order.paymentType),
+                    widget.order.paymentType),
                 SizedBox(
                   height: 10,
                 ),
@@ -309,7 +350,7 @@ class AppointmentDetails extends StatelessWidget {
                       style: TextStyle(color: Colors.black),
                     ),
                     Text(
-                      '${order.grandTotal} SAR',
+                      '${widget.order.grandTotal} SAR',
                       style: TextStyle(color: Colors.black),
                     ),
                   ],
@@ -332,7 +373,7 @@ class AppointmentDetails extends StatelessWidget {
                           color: Colors.black, fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      '${order.grandTotal} SAR',
+                      '${widget.order.grandTotal} SAR',
                       style: TextStyle(
                           color: Colors.black, fontWeight: FontWeight.bold),
                     ),
@@ -347,6 +388,11 @@ class AppointmentDetails extends StatelessWidget {
                         child: SizedBox(
                       height: 48,
                       child: ElevatedButton(
+                        onPressed:() async {
+                          await PrintInv.generateInvoice(widget.order,PdfPageFormat.a4);
+                          print('object');
+
+                        },
                         child: Text(
                           'Print Invoice',
                           style: TextStyle(color: mGrey),
@@ -368,6 +414,7 @@ class AppointmentDetails extends StatelessWidget {
                         child: SizedBox(
                       height: 48,
                       child: ElevatedButton(
+                        onPressed: (){changeStatus(widget.order.deliveryStatus);},
                         child: Text(
                           'Change Status',
                           style: TextStyle(color: Colors.white),

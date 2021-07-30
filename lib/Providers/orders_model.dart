@@ -56,6 +56,42 @@ class ApointmentsData {
       return [];
     }
   }
+
+  Future<bool> changeStatus(String status,String id) async {
+
+
+    Map<String,String> body = {
+      'order_status':status,
+      'payment_status':'unpaid',
+
+    };
+
+    try {
+      Response response = await Dio().post('${Constants.DOMAIN}shop-staff/orders/$id/change-status',data: body,options: Options(headers: Constants.HEADER));
+
+
+      print(response.data);
+
+      if(response.statusCode>=400){
+        return false;
+
+      }else{
+       // final responseJson = json.decode(response.data);
+       // print('response json '+responseJson);
+        if(response.data['result'] as bool==false){
+          return false;
+        }else{
+          return true;
+        }
+      }
+
+
+
+    } catch (error) {
+      print(error);
+      return false;
+    }
+  }
   
   
 }
@@ -65,6 +101,7 @@ class Data {
   String orderType;
   String bookingDateTime;
   String code;
+  String booking_staff_name;
   String tax;
   String user_name;
   String user_phone;
@@ -108,6 +145,7 @@ class Data {
     orderType = json['order_type']as String;
     bookingDateTime = json['delivery_date_time']as String;
     code = json['code']as String;
+    booking_staff_name = json['booking_staff_name']as String;
     paymentType = json['payment_type']as String;
     userId = json['user_id']as int;
     paymentStatus = json['payment_status']as String;
