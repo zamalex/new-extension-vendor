@@ -20,6 +20,7 @@ class OrderList extends StatefulWidget {
 
 class _OrderListState extends State<OrderList> {
   List<Data> appointmeents = [];
+  List<Data> allAppointmeents = [];
   bool loading = false;
 
   // List<UserNotification> userNotifications = <UserNotification>(new UserNotification(id:1,title:'test title', time:'12',content:'text content',isRead: false));
@@ -72,6 +73,19 @@ class _OrderListState extends State<OrderList> {
     );
   }
 
+  search(String query){
+    if(query.isNotEmpty){
+      setState(() {
+        appointmeents = allAppointmeents.where((element) => element.user_name.toLowerCase().contains(query.toLowerCase())||element.id.toString().toLowerCase().contains(query.toLowerCase())).toList();
+      });
+    }
+  }
+
+  clear(){
+    setState(() {
+      appointmeents = allAppointmeents;
+    });
+  }
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
@@ -101,6 +115,7 @@ class _OrderListState extends State<OrderList> {
       setState(() {
 
         appointmeents = value.where((element) => element.orderType=='purchase').toList();
+        allAppointmeents = value.where((element) => element.orderType=='purchase').toList();
       });
 
     });
@@ -144,6 +159,7 @@ class _OrderListState extends State<OrderList> {
                 child: new ListTile(
                   leading: new Icon(Icons.search),
                   title: new TextField(
+                    onSubmitted: (s)=>search(s),
                     controller: controller,
                     decoration: new InputDecoration(
                         hintText: 'Search', border: InputBorder.none),
@@ -152,9 +168,11 @@ class _OrderListState extends State<OrderList> {
                   trailing: new IconButton(
                     icon: new Icon(Icons.cancel),
                     onPressed: () {
+                      clear();
                       controller.clear();
                       onSearchTextChanged('');
                     },
+
                   ),
                 ),
               ),

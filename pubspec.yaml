@@ -58,6 +58,10 @@ flutter:
      - assets/images/Buy@3x.png
      - assets/images/Calendar Selected@3x.png
      - assets/images/Document@3x.png
+     - assets/images/Call@3x.png
+     - assets/images/Location@3x.png
+     - assets/images/Message@3x.png
+     - assets/images/Wallet@3x.png
      - assets/images/Notification@3x.png
      - assets/images/hair.jpg
      - assets/images/Calendar - Profile@3x.png

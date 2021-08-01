@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:salon_vendor/Providers/notification_model.dart';
+import 'package:salon_vendor/Providers/notifications.dart';
 import 'package:salon_vendor/Widgets/notification_wedgit.dart';
 // import 'package:takafol/Providers/constants.dart';
 // import 'package:takafol/Utilities/static_functions.dart';
@@ -14,6 +15,8 @@ class UserNotificationsList extends StatefulWidget {
 }
 
 class _UserNotificationsListState extends State<UserNotificationsList> {
+  List<Notifications> notifications = [];
+  bool loading = false;
   List<UserNotification> userNotifications = [
     UserNotification(
         id: 1,
@@ -70,6 +73,17 @@ class _UserNotificationsListState extends State<UserNotificationsList> {
   @override
   void initState() {
     super.initState();
+
+    setState(() {
+      loading = true;
+    });
+    Notifications().getNotifications().then((value){
+
+      setState(() {
+        notifications = value;
+        loading = false;
+      });
+    });
     // if (Constants.USER_TOKEN == "" || Constants.USER_TOKEN == null) {
     //   WidgetsBinding.instance.addPostFrameCallback((_) async {
     //     // if Constants.USER_TOKEN != ""{
@@ -99,16 +113,11 @@ class _UserNotificationsListState extends State<UserNotificationsList> {
         ),
         backgroundColor: Color.fromRGBO(118, 123, 128, 1),
       ),
-      body: isNotificationLoaded
+      body: !loading
           ? ListView.builder(
               itemCount: userNotifications.length,
               itemBuilder: (context, index) => UserNotificationWedgit(
-                  userNotifications[index].title,
-                  userNotifications[index].time,
-                  userNotifications[index].userName,
-                  userNotifications[index].isRead,
-                  userNotifications[index].serviceCode,
-                  userNotifications[index].price),
+                 notifications[index]),
             )
           : Center(
               child: CircularProgressIndicator(),

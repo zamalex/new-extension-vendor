@@ -21,6 +21,9 @@ class _AppointmentListState extends State<AppointmentList> {
   List<Data> appointmeents = [
 
   ];
+  List<Data> allAppointmeents = [
+
+  ];
   bool loading = false;
   TextEditingController controller = new TextEditingController();
  
@@ -72,6 +75,20 @@ class _AppointmentListState extends State<AppointmentList> {
     //   setState(() {});
     // }
   }
+
+  search(String query){
+    if(query.isNotEmpty){
+      setState(() {
+        appointmeents = allAppointmeents.where((element) => element.user_name.toLowerCase().contains(query.toLowerCase())||element.id.toString().toLowerCase().contains(query.toLowerCase())).toList();
+      });
+    }
+  }
+
+  clear(){
+    setState(() {
+      appointmeents = allAppointmeents;
+    });
+  }
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
@@ -101,6 +118,7 @@ class _AppointmentListState extends State<AppointmentList> {
       setState(() {
         loading = false;
         appointmeents = value.where((element) => element.orderType=='purchase').toList();
+        allAppointmeents = value.where((element) => element.orderType=='purchase').toList();
       });
 
     });
@@ -143,6 +161,7 @@ class _AppointmentListState extends State<AppointmentList> {
                 child: new ListTile(
                   leading: new Icon(Icons.search),
                   title: new TextField(
+                    onSubmitted: (query)=>search(query),
                     controller: controller,
                     decoration: new InputDecoration(
                         hintText: 'Search', border: InputBorder.none),
@@ -151,6 +170,7 @@ class _AppointmentListState extends State<AppointmentList> {
                   trailing: new IconButton(
                     icon: new Icon(Icons.cancel),
                     onPressed: () {
+                      clear();
                       controller.clear();
                       onSearchTextChanged('');
                     },

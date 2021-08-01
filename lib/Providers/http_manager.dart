@@ -14,7 +14,7 @@ class HttpManager {
 
   //Singleton mode, create an instance only once
   static Dio getInstance() {
-    if (null == _dio) {
+
       _dio = Dio();
 
       _dio.interceptors.add(InterceptorsWrapper(
@@ -39,7 +39,7 @@ class HttpManager {
       ));
 
       return _dio;
-    }
+
   }
 
 }

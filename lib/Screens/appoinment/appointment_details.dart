@@ -73,6 +73,7 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
                 ListTile(
                   contentPadding: EdgeInsets.symmetric(horizontal: 0),
                   leading: CircleAvatar(
+                    child: ClipRRect(child: Image.asset('assets/images/welcome.png'),borderRadius: BorderRadius.circular(50),),
                     backgroundColor: Colors.grey,
                     radius: 30,
                   ),
@@ -89,11 +90,7 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
                   height: 10,
                 ),
                 _iconText(
-                    Icon(
-                      Icons.location_pin,
-                      color: mGrey,
-                      size: 30,
-                    ),
+                   'assets/images/Location@3x.png',
                     'Address'),
                 SizedBox(
                   height: 5,
@@ -109,11 +106,7 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
                   height: 10,
                 ),
                 _iconText(
-                    Icon(
-                      Icons.email_outlined,
-                      color: mGrey,
-                      size: 30,
-                    ),
+                    'assets/images/Message@3x.png',
                     'Email address'),
                 SizedBox(
                   height: 5,
@@ -129,11 +122,7 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
                   height: 10,
                 ),
                 _iconText(
-                    Icon(
-                      Icons.phone_enabled_outlined,
-                      color: mGrey,
-                      size: 30,
-                    ),
+                   'assets/images/Call@3x.png',
                     'Phone number'),
                 SizedBox(
                   height: 5,
@@ -152,11 +141,7 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
                   height: 10,
                 ),
                 _iconText(
-                    Icon(
-                      Icons.list_alt,
-                      color: mGrey,
-                      size: 30,
-                    ),
+                    'assets/images/Document@3x.png',
                     'Service code. ${widget.order.id}'),
                 SizedBox(
                   height: 10,
@@ -317,11 +302,7 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
                   height: 10,
                 ),
                 _iconTextLight(
-                    Icon(
-                      Icons.account_balance_wallet_outlined,
-                      color: mGrey,
-                      size: 30,
-                    ),
+                    'assets/images/Wallet@3x.png',
                     widget.order.paymentType),
                 SizedBox(
                   height: 10,
@@ -431,10 +412,12 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
     );
   }
 
-  Widget _iconText(Widget icon, String text) {
+  Widget _iconText(String icon, String text) {
     return Row(
       children: [
-        icon,
+        Image.asset(icon,width: 20,height: 20,),
+        SizedBox(width: 10,),
+
         Text(
           text,
           style: TextStyle(
@@ -444,10 +427,12 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
     );
   }
 
-  Widget _iconTextLight(Widget icon, String text) {
+  Widget _iconTextLight(String icon, String text) {
     return Row(
       children: [
-        icon,
+        Image.asset(icon,width: 20,height: 20,),
+        SizedBox(width: 10,),
+
         Text(
           text,
           style: TextStyle(color: Colors.black, fontSize: 17),

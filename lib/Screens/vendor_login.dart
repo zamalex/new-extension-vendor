@@ -108,8 +108,10 @@ void goHome() {
            loading=false;
          });
 
-         if(value.user==null)
-            print('no user found');
+         if(value==null||value.user==null){
+           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('invalid credintals')));
+         }
+
           else {
            goHome();
           Constants.USER_TOKEN = value.accessToken;
