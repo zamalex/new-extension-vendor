@@ -1,3 +1,5 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:salon_vendor/Screens/appoinment/appointment_list.dart';
 import 'package:salon_vendor/Screens/home_screen.dart';
@@ -5,13 +7,16 @@ import 'package:salon_vendor/Screens/vendor_login.dart';
 
 import 'Screens/Notification/NotificationList.dart';
 
-void main() {
+Future<void> main()  {
+  //await Firebase.initializeApp();
+
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   int _selectedIndex = 0;
+
   List<Widget> _widgetOptions = <Widget>[
   
     UserNotificationsList(),
@@ -19,6 +24,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+  //  FirebaseCrashlytics.instance.crash();
+
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -63,15 +70,17 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _incrementCounter();
+  }
+
+  void _incrementCounter() async{
+    await Firebase.initializeApp();
+    //FirebaseCrashlytics.instance.crash();
+
   }
 
   @override

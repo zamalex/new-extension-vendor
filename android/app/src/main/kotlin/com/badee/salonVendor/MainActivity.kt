@@ -1,4 +1,4 @@
-package com.example.salon_vendor
+package com.badee.salonVendor
 
 import io.flutter.embedding.android.FlutterActivity
 
