@@ -1,5 +1,5 @@
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+//import 'package:firebase_core/firebase_core.dart';
+//import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:salon_vendor/Screens/appoinment/appointment_list.dart';
 import 'package:salon_vendor/Screens/home_screen.dart';
@@ -78,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _incrementCounter() async{
-    await Firebase.initializeApp();
+    //await Firebase.initializeApp();
     //FirebaseCrashlytics.instance.crash();
 
   }
