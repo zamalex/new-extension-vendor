@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
+import 'package:provider/provider.dart';
 import 'package:salon_vendor/Providers/orders_model.dart';
 import 'package:salon_vendor/Providers/datetime.dart';
+import 'package:salon_vendor/Providers/orders_provider.dart';
 import 'package:salon_vendor/Providers/tstt.dart';
 
 class OrderDetails extends StatefulWidget {
@@ -46,7 +48,7 @@ class _OrderDetailsState extends State<OrderDetails> {
           widget.order.deliveryStatus = status;
         });
       }
-
+      Provider.of<OrdersProvider>(context, listen: false).getOrders();
     });
 
   }
@@ -107,7 +109,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                 SizedBox(
                   height: 5,
                 ),
-                SizedBox(
+              /*  SizedBox(
                   height: 10,
                 ),
                 _iconText(
@@ -117,9 +119,9 @@ class _OrderDetailsState extends State<OrderDetails> {
                   height: 5,
                 ),
                 Text(
-                  'Ahlam_Ab22@gmail.com',
+                  widget.order.user_phone??'',
                   style: TextStyle(color: Colors.black),
-                ),
+                ),*/
                 SizedBox(
                   height: 5,
                 ),

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
+import 'package:provider/provider.dart';
 import 'package:salon_vendor/Providers/appoinment_model.dart';
 import 'package:salon_vendor/Providers/orders_model.dart';
 import 'package:salon_vendor/Providers/datetime.dart';
+import 'package:salon_vendor/Providers/orders_provider.dart';
 import 'package:salon_vendor/Providers/tstt.dart';
 class AppointmentDetails extends StatefulWidget {
 
@@ -38,6 +40,7 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
           widget.order.deliveryStatus = status;
         });
       }
+      Provider.of<OrdersProvider>(context, listen: false).getAppointments();
 
     });
 
@@ -102,7 +105,7 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
                 SizedBox(
                   height: 5,
                 ),
-                SizedBox(
+                /*SizedBox(
                   height: 10,
                 ),
                 _iconText(
@@ -114,7 +117,7 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
                 Text(
                   'Ahlam_Ab22@gmail.com',
                   style: TextStyle(color: Colors.black),
-                ),
+                ),*/
                 SizedBox(
                   height: 5,
                 ),

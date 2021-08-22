@@ -1,10 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:salon_vendor/Providers/appoinment_model.dart';
 import 'package:salon_vendor/Providers/notification_model.dart';
 import 'package:salon_vendor/Providers/order_model.dart';
 import 'package:salon_vendor/Providers/orders_model.dart';
+import 'package:salon_vendor/Providers/orders_provider.dart';
 import 'package:salon_vendor/Screens/order/order_details.dart';
 import 'package:salon_vendor/Widgets/notification_wedgit.dart';
 import 'package:salon_vendor/Widgets/order_wedgit.dart';
@@ -19,9 +21,7 @@ class OrderList extends StatefulWidget {
 }
 
 class _OrderListState extends State<OrderList> {
-  List<Data> appointmeents = [];
-  List<Data> allAppointmeents = [];
-  bool loading = false;
+
 
   // List<UserNotification> userNotifications = <UserNotification>(new UserNotification(id:1,title:'test title', time:'12',content:'text content',isRead: false));
   var _init = true;
@@ -73,19 +73,7 @@ class _OrderListState extends State<OrderList> {
     );
   }
 
-  search(String query){
-    if(query.isNotEmpty){
-      setState(() {
-        appointmeents = allAppointmeents.where((element) => element.user_name.toLowerCase().contains(query.toLowerCase())||element.id.toString().toLowerCase().contains(query.toLowerCase())).toList();
-      });
-    }
-  }
 
-  clear(){
-    setState(() {
-      appointmeents = allAppointmeents;
-    });
-  }
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
@@ -106,19 +94,12 @@ class _OrderListState extends State<OrderList> {
   @override
   void initState() {
     super.initState();
-    setState(() {
-      loading = true;
-    });
-    ApointmentsData().getOrders(page: 1).then((value){
-      loading = false;
 
-      setState(() {
-
-        appointmeents = value.where((element) => element.orderType=='purchase').toList();
-        allAppointmeents = value.where((element) => element.orderType=='purchase').toList();
-      });
+    Future.delayed(Duration.zero).then((value){
+      Provider.of<OrdersProvider>(context, listen: false).getOrders();
 
     });
+
 
     // if (Constants.USER_TOKEN == "" || Constants.USER_TOKEN == null) {
     //   WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -159,7 +140,7 @@ class _OrderListState extends State<OrderList> {
                 child: new ListTile(
                   leading: new Icon(Icons.search),
                   title: new TextField(
-                    onSubmitted: (s)=>search(s),
+                    onSubmitted: (s)=>Provider.of<OrdersProvider>(context, listen: false).osearch(s),
                     controller: controller,
                     decoration: new InputDecoration(
                         hintText: 'Search', border: InputBorder.none),
@@ -168,7 +149,7 @@ class _OrderListState extends State<OrderList> {
                   trailing: new IconButton(
                     icon: new Icon(Icons.cancel),
                     onPressed: () {
-                      clear();
+                      Provider.of<OrdersProvider>(context, listen: false).oclear();
                       controller.clear();
                       onSearchTextChanged('');
                     },
@@ -178,13 +159,13 @@ class _OrderListState extends State<OrderList> {
               ),
             ),
           ),
-          loading?Center(child: CircularProgressIndicator(),):Expanded(
+          Provider.of<OrdersProvider>(context,).loading?Center(child: CircularProgressIndicator(),):Expanded(
             child: isNotificationLoaded
                 ? ListView.builder(
-                    itemCount: appointmeents.length,
+                    itemCount: Provider.of<OrdersProvider>(context,).orders.length,
                     itemBuilder: (context, index) => OrderWedgit(
-                          appointmeents[index],
-                        () => goOrdersDetails(appointmeents[index])),
+                        Provider.of<OrdersProvider>(context,).orders[index],
+                        () => goOrdersDetails(Provider.of<OrdersProvider>(context, listen: false).orders[index])),
                   )
                 : Center(
                     child: CircularProgressIndicator(),

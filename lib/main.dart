@@ -1,9 +1,11 @@
 //import 'package:firebase_core/firebase_core.dart';
 //import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
+import 'package:salon_vendor/Providers/orders_provider.dart';
 import 'package:salon_vendor/Screens/appoinment/appointment_list.dart';
 import 'package:salon_vendor/Screens/home_screen.dart';
 import 'package:salon_vendor/Screens/vendor_login.dart';
+import 'package:provider/provider.dart';
 
 import 'Screens/Notification/NotificationList.dart';
 
@@ -44,7 +46,8 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: ChangeNotifierProvider(create: (BuildContext context) =>OrdersProvider(),
+          child: MyHomePage(title: 'vendor',)),
     );
   }
 }
