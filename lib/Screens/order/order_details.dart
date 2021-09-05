@@ -48,7 +48,7 @@ class _OrderDetailsState extends State<OrderDetails> {
           widget.order.deliveryStatus = status;
         });
       }
-      Provider.of<OrdersProvider>(context, listen: false).getOrders();
+      Provider.of<OrdersProvider>(context, listen: false).getOrders(1);
     });
 
   }
@@ -113,7 +113,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                   height: 10,
                 ),
                 _iconText(
-                    'assets/images/Message@3x.png',
+                    'assets/images/MesFsage@3x.png',
                     'Email address'),
                 SizedBox(
                   height: 5,

@@ -26,7 +26,9 @@ class _AppointmentListState extends State<AppointmentList> {
   // List<UserNotification> userNotifications = <UserNotification>(new UserNotification(id:1,title:'test title', time:'12',content:'text content',isRead: false));
   var _init = true;
   var isNotificationLoaded = true;
+  ScrollController _scrollController = new ScrollController();
 
+  int page = 1;
   // Future<void> getNotificationList() async {
   //   var userNotification = UserNotification();
   //   try {
@@ -98,9 +100,20 @@ class _AppointmentListState extends State<AppointmentList> {
 
 
     Future.delayed(Duration.zero).then((value){
-      Provider.of<OrdersProvider>(context, listen: false).getAppointments();
+      Provider.of<OrdersProvider>(context, listen: false).getAppointments(page);
 
     });
+
+    _scrollController
+        .addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        Future.delayed(Duration.zero).then((value){
+          Provider.of<OrdersProvider>(context, listen: false).getAppointments(++page);
+
+        });        }
+    });
+
 
     // if (Constants.USER_TOKEN == "" || Constants.USER_TOKEN == null) {
     //   WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -162,6 +175,7 @@ class _AppointmentListState extends State<AppointmentList> {
           Provider.of<OrdersProvider>(context,).loading?Center(child: CircularProgressIndicator(),): Expanded(
             child: isNotificationLoaded
                 ? ListView.builder(
+                  controller: _scrollController,
                     itemCount: Provider.of<OrdersProvider>(context,).appointmeents.length,
                     itemBuilder: (context, index) => OrderWedgit(
                         Provider.of<OrdersProvider>(context,).appointmeents[index],

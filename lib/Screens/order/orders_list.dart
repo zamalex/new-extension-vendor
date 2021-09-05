@@ -27,7 +27,9 @@ class _OrderListState extends State<OrderList> {
   var _init = true;
   var isNotificationLoaded = true;
   TextEditingController controller = new TextEditingController();
+  ScrollController _scrollController = new ScrollController();
 
+  int page = 1;
   // Future<void> getNotificationList() async {
   //   var userNotification = UserNotification();
   //   try {
@@ -96,9 +98,19 @@ class _OrderListState extends State<OrderList> {
     super.initState();
 
     Future.delayed(Duration.zero).then((value){
-      Provider.of<OrdersProvider>(context, listen: false).getOrders();
+      Provider.of<OrdersProvider>(context, listen: false).getOrders(page);
 
     });
+
+    _scrollController
+      .addListener(() {
+        if (_scrollController.position.pixels ==
+            _scrollController.position.maxScrollExtent) {
+          Future.delayed(Duration.zero).then((value){
+            Provider.of<OrdersProvider>(context, listen: false).getOrders(++page);
+
+          });        }
+      });
 
 
     // if (Constants.USER_TOKEN == "" || Constants.USER_TOKEN == null) {
@@ -162,6 +174,7 @@ class _OrderListState extends State<OrderList> {
           Provider.of<OrdersProvider>(context,).loading?Center(child: CircularProgressIndicator(),):Expanded(
             child: isNotificationLoaded
                 ? ListView.builder(
+                    controller: _scrollController,
                     itemCount: Provider.of<OrdersProvider>(context,).orders.length,
                     itemBuilder: (context, index) => OrderWedgit(
                         Provider.of<OrdersProvider>(context,).orders[index],

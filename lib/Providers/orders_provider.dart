@@ -44,33 +44,47 @@ class OrdersProvider extends ChangeNotifier{
       notifyListeners();
   }
 
-  getAppointments()async {
+  getAppointments(int page)async {
 
     loading = true;
     notifyListeners();
 
-    await ApointmentsData().getOrders(page: 1).then((value){
+    await ApointmentsData().getOrders(page: page,type:'booking').then((value){
       print(value.length);
 
         loading = false;
-        appointmeents = value.where((element) => element.orderType=='booking').toList();
-        allAppointmeents = value.where((element) => element.orderType=='booking').toList();
+        if(page==1){
+          appointmeents = value.where((element) => element.orderType=='booking').toList();
+          allAppointmeents = value.where((element) => element.orderType=='booking').toList();
+        }else{
+          appointmeents.addAll(value.where((element) => element.orderType=='booking').toList());
+          allAppointmeents.addAll(value.where((element) => element.orderType=='booking').toList());
+        }
+
       });
 
     notifyListeners();
 
   }
 
-  getOrders()async{
+  getOrders(int page)async{
     loading = true;
     notifyListeners();
 
-    await ApointmentsData().getOrders(page: 1).then((value){
+    await ApointmentsData().getOrders(page: page,type:'purchase').then((value){
       loading = false;
 
+      if(page==1){
 
         orders = value.where((element) => element.orderType=='purchase').toList();
         allOrders = value.where((element) => element.orderType=='purchase').toList();
+
+      }else{
+
+        orders.addAll(value.where((element) => element.orderType=='purchase').toList());
+        allOrders.addAll(value.where((element) => element.orderType=='purchase').toList());
+
+      }
 
     });
 

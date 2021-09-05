@@ -40,7 +40,7 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
           widget.order.deliveryStatus = status;
         });
       }
-      Provider.of<OrdersProvider>(context, listen: false).getAppointments();
+      Provider.of<OrdersProvider>(context, listen: false).getAppointments(1);
 
     });
 
