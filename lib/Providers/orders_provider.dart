@@ -46,8 +46,10 @@ class OrdersProvider extends ChangeNotifier{
 
   getAppointments(int page)async {
 
-    loading = true;
-    notifyListeners();
+    if(page==1) {
+      loading = true;
+      notifyListeners();
+    }
 
     await ApointmentsData().getOrders(page: page,type:'booking').then((value){
       print(value.length);
@@ -68,9 +70,10 @@ class OrdersProvider extends ChangeNotifier{
   }
 
   getOrders(int page)async{
-    loading = true;
-    notifyListeners();
-
+   if(page==1) {
+     loading = true;
+     notifyListeners();
+   }
     await ApointmentsData().getOrders(page: page,type:'purchase').then((value){
       loading = false;
 
