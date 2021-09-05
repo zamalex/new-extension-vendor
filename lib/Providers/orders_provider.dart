@@ -19,7 +19,7 @@ class OrdersProvider extends ChangeNotifier{
 
   osearch(String query){
     if(query.isNotEmpty){
-        orders = allOrders.where((element) => element.user_name.toLowerCase().contains(query.toLowerCase())||element.id.toString().toLowerCase().contains(query.toLowerCase())).toList();
+        orders = allOrders.where((element) => (element.user_name!=null&&element.user_name.toLowerCase().contains(query.toLowerCase()))||(element.id!=null&&element.id.toString().toLowerCase().contains(query.toLowerCase()))).toList();
     }
     notifyListeners();
   }
@@ -31,7 +31,7 @@ class OrdersProvider extends ChangeNotifier{
   search(String query){
     if(query.isNotEmpty){
 
-        appointmeents = allAppointmeents.where((element) => element.user_name.toLowerCase().contains(query.toLowerCase())||element.id.toString().toLowerCase().contains(query.toLowerCase())).toList();
+        appointmeents = allAppointmeents.where((element) => (element.user_name!=null&&element.user_name.toLowerCase().contains(query.toLowerCase())||(element.id!=null&&element.id.toString().toLowerCase().contains(query.toLowerCase())))).toList();
 
     }
     notifyListeners();
