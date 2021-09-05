@@ -32,7 +32,7 @@ class ApointmentsData {
 
     try {
       print('request ${Constants.DOMAIN}shop-staff/orders?page=$page&order_type=$type');
-      Response response = await Dio().get('${Constants.DOMAIN}shop-staff/orders?page=$page',options: Options(headers: Constants.HEADER));
+      Response response = await Dio().get('${Constants.DOMAIN}shop-staff/orders?page=$page&order_type=$type',options: Options(headers: Constants.HEADER));
 
 
       print(response.data);
