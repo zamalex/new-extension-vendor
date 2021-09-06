@@ -7,7 +7,7 @@ class Constants {
   
   //Global var
   static User CURRENT_USER = User();
-  static String USER_TOKEN = "";
+  static String USER_TOKEN = null;
   static String PLAYER_ID = "";
   static Color kPrimaryColor = Color.fromRGBO(118, 123, 128, 1);
   static var HEADER = {

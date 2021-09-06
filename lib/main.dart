@@ -1,11 +1,13 @@
 //import 'package:firebase_core/firebase_core.dart';
 //import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
+import 'package:salon_vendor/Providers/constants.dart';
 import 'package:salon_vendor/Providers/orders_provider.dart';
 import 'package:salon_vendor/Screens/appoinment/appointment_list.dart';
 import 'package:salon_vendor/Screens/home_screen.dart';
 import 'package:salon_vendor/Screens/vendor_login.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Screens/Notification/NotificationList.dart';
 
@@ -78,6 +80,8 @@ class _MyHomePageState extends State<MyHomePage> {
     // TODO: implement initState
     super.initState();
     _incrementCounter();
+
+
   }
 
   void _incrementCounter() async{
@@ -85,6 +89,8 @@ class _MyHomePageState extends State<MyHomePage> {
     //FirebaseCrashlytics.instance.crash();
 
   }
+
+
 
   @override
   Widget build(BuildContext context) {

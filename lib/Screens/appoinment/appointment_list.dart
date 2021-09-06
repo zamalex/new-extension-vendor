@@ -3,12 +3,15 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:salon_vendor/Providers/appoinment_model.dart';
+import 'package:salon_vendor/Providers/constants.dart';
 import 'package:salon_vendor/Providers/notification_model.dart';
 import 'package:salon_vendor/Providers/orders_model.dart';
 import 'package:salon_vendor/Providers/orders_provider.dart';
 import 'package:salon_vendor/Screens/appoinment/appointment_details.dart';
+import 'package:salon_vendor/Screens/vendor_login.dart';
 import 'package:salon_vendor/Widgets/notification_wedgit.dart';
 import 'package:salon_vendor/Widgets/order_wedgit.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:takafol/Providers/constants.dart';
 // import 'package:takafol/Utilities/static_functions.dart';
 // import 'package:takafol/Widgets/loginCustomeAlert.dart';
@@ -134,8 +137,36 @@ class _AppointmentListState extends State<AppointmentList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          InkWell(
+            onTap: () async {
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              await prefs.remove('token');
+              Constants.USER_TOKEN = null;
+
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => VendorLogin()),
+              );
+            },
+            child:  Center(
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 10),
+                child: Text(
+                  'Logout',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+
+                    fontSize: 14,
+                  ),
+                ),
+              ),
+            ),
+          )
+        ],
         title: Text(
-          'Appointents',
+          'Appointments',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,

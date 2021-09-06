@@ -6,11 +6,17 @@ import 'package:salon_vendor/Screens/home_screen.dart';
 import 'package:salon_vendor/vendor/text_field.dart';
 import 'package:salon_vendor/vendor/theme_button.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
 
 
-class VendorLogin extends StatelessWidget {
+class VendorLogin extends StatefulWidget {
 
 
+  @override
+  _VendorLoginState createState() => _VendorLoginState();
+}
+
+class _VendorLoginState extends State<VendorLogin> {
   @override
   Widget build(BuildContext context) {
 
@@ -54,6 +60,8 @@ class SignInWidget extends StatefulWidget {
 
   @override
   _SignInWidgetState createState() => _SignInWidgetState();
+
+
 }
 
 class _SignInWidgetState extends State<SignInWidget> with SingleTickerProviderStateMixin {
@@ -73,6 +81,18 @@ class _SignInWidgetState extends State<SignInWidget> with SingleTickerProviderSt
 
   String _title;
 
+  checkToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = (prefs.getString('token') ?? null);
+    Constants.USER_TOKEN = token;
+
+    if(Constants.USER_TOKEN!=null){
+      Future.delayed(Duration.zero).then((value){
+        goHome();
+      });
+    }
+  }
+
   @override
   void initState() {
     _controller = AnimationController(vsync: this);
@@ -82,6 +102,7 @@ class _SignInWidgetState extends State<SignInWidget> with SingleTickerProviderSt
 
     _title = widget.title ?? '';
 
+    checkToken();
     super.initState();
   }
 
@@ -103,7 +124,7 @@ void goHome() {
       setState(() {
         loading=true;
       });
-       LoginModel().loginUser(_textEmailController.text, _textPassController.text).then((value) {
+       LoginModel().loginUser(_textEmailController.text, _textPassController.text).then((value) async {
          setState(() {
            loading=false;
          });
@@ -113,6 +134,8 @@ void goHome() {
          }
 
           else {
+           SharedPreferences prefs = await SharedPreferences.getInstance();
+           await prefs.setString('token',  value.accessToken);
            goHome();
           Constants.USER_TOKEN = value.accessToken;
           }
