@@ -132,7 +132,7 @@ class _OrderListState extends State<OrderList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(118, 123, 128, 1),
+        backgroundColor: Color.fromRGBO(174, 117, 106, 1),
         title: Text(
           'Orders',
           style: TextStyle(
@@ -145,7 +145,7 @@ class _OrderListState extends State<OrderList> {
       body: Column(
         children: [
           new Container(
-            color: Color.fromRGBO(118, 123, 128, 1),
+            color: Color.fromRGBO(174, 117, 106, 1),
             child: new Padding(
               padding: const EdgeInsets.all(8.0),
               child: new Card(

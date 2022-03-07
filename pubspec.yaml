@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 1.0.2+2
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -32,9 +32,12 @@ dependencies:
   dio: ^4.0.0
   intl: ^0.17.0
   pdf: ^3.4.2
-  esys_flutter_share: ^1.0.2
+  esys_flutter_share:
+    git:
+      url: https://github.com/cihadturhan/esys-flutter-share.git
+      ref: nullsafety+embedding-2
   provider: ^6.0.0
-  shared_preferences: ^0.5.12+4
+  shared_preferences: ^2.0.12
   #firebase_core: "^0.7.0"
   #firebase_crashlytics: "^0.4.0+1"
 
@@ -118,6 +121,12 @@ flutter:
     - family: Cairo
       fonts:
         - asset: assets/fonts/Cairo-Regular.ttf
+    - family: Expo
+      fonts:
+        - asset: assets/fonts/Expo-Medium.ttf
+        - asset: assets/fonts/Expo-Light.ttf
+        - asset: assets/fonts/Expo-Book.ttf
+        - asset: assets/fonts/Expo-Bold.ttf
 
   #         style: italic
   #   - family: Trajan Pro

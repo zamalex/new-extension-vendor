@@ -1,8 +1,10 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:salon_vendor/Providers/constants.dart';
 import 'package:salon_vendor/Providers/loginmodel.dart';
 import 'package:salon_vendor/Screens/home_screen.dart';
+import 'package:salon_vendor/Screens/worker/worker_appointments.dart';
 import 'package:salon_vendor/vendor/text_field.dart';
 import 'package:salon_vendor/vendor/theme_button.dart';
 
@@ -84,11 +86,12 @@ class _SignInWidgetState extends State<SignInWidget> with SingleTickerProviderSt
   checkToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = (prefs.getString('token') ?? null);
+    String type = (prefs.getString('type') ?? null);
     Constants.USER_TOKEN = token;
 
-    if(Constants.USER_TOKEN!=null){
+    if(Constants.USER_TOKEN!=null&&type!=null){
       Future.delayed(Duration.zero).then((value){
-        goHome();
+        goHome(type);
       });
     }
   }
@@ -111,10 +114,11 @@ class _SignInWidgetState extends State<SignInWidget> with SingleTickerProviderSt
     _controller.dispose();
     super.dispose();
   }
-void goHome() {
+void goHome(String type) {
+
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Home()),
+        MaterialPageRoute(builder: (context) =>type!='staff'?Home(): WorkerAppointmentsList()),
       );
     }
   void _validateForm() {
@@ -130,13 +134,20 @@ void goHome() {
          });
 
          if(value==null||value.user==null){
-           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('invalid credintals')));
+           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('invalid credentials')));
          }
 
           else {
+           if(value.user.type=='customer'){
+             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('invalid credentials')));
+
+             return;
+           }
            SharedPreferences prefs = await SharedPreferences.getInstance();
            await prefs.setString('token',  value.accessToken);
-           goHome();
+           await prefs.setString('type',  value.user.type);
+
+           goHome(value.user.type);
           Constants.USER_TOKEN = value.accessToken;
           }
 

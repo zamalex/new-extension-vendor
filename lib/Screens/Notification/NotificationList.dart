@@ -111,7 +111,7 @@ class _UserNotificationsListState extends State<UserNotificationsList> {
             fontSize: 14,
           ),
         ),
-        backgroundColor: Color.fromRGBO(118, 123, 128, 1),
+        backgroundColor: Color.fromRGBO(174, 117, 106, 1),
       ),
       body: !loading
           ? ListView.builder(

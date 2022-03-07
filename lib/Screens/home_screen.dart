@@ -24,7 +24,7 @@ class _HomeState extends State<Home> {
       _selectedIndex = index;
     });
   }
-   final kPrimaryColor = Color.fromRGBO(118, 123, 128, 1);
+   final kPrimaryColor = Color.fromRGBO(174, 117, 106, 1);
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class _HomeState extends State<Home> {
                //   margin: EdgeInsets.symmetric(horizontal: 5),
                   // padding: EdgeInsets.all(8),
                   decoration:  BoxDecoration(
-                    color: _selectedIndex==0?Color.fromRGBO(118, 123, 128, 1):Colors.transparent,
+                    color: _selectedIndex==0?Color.fromRGBO(174, 117, 106, 1):Colors.transparent,
                     borderRadius:  BorderRadius.circular(20),
                   ),
                   child: _selectedIndex==0?Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,children: [Image.asset(
@@ -76,7 +76,7 @@ class _HomeState extends State<Home> {
                 //  margin: EdgeInsets.symmetric(horizontal: 5),
                   // padding: EdgeInsets.all(8),
                   decoration:  BoxDecoration(
-                    color: _selectedIndex==1?Color.fromRGBO(118, 123, 128, 1):Colors.transparent,
+                    color: _selectedIndex==1?Color.fromRGBO(174, 117, 106, 1):Colors.transparent,
                     borderRadius:  BorderRadius.circular(20),
                   ),
                   child: _selectedIndex==1?Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,children: [Image.asset(
@@ -101,7 +101,7 @@ class _HomeState extends State<Home> {
                  // margin: EdgeInsets.symmetric(horizontal: 5),
                   // padding: EdgeInsets.all(8),
                   decoration:  BoxDecoration(
-                    color: _selectedIndex==2?Color.fromRGBO(118, 123, 128, 1):Colors.transparent,
+                    color: _selectedIndex==2?Color.fromRGBO(174, 117, 106, 1):Colors.transparent,
                     borderRadius:  BorderRadius.circular(20),
                   ),
                   child: _selectedIndex==2?Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,children: [Image.asset(

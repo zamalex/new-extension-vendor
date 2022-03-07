@@ -46,7 +46,7 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
 
   }
 
-  final mGrey = const Color.fromRGBO(118, 123, 128, 1);
+  final mGrey = const Color.fromRGBO(174, 117, 106, 1);
 
   final dGrey = const Color.fromRGBO(184, 189, 194, 1);
 
@@ -56,7 +56,7 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(118, 123, 128, 1),
+        backgroundColor: const Color.fromRGBO(174, 117, 106, 1),
         iconTheme: const IconThemeData(color: Colors.white),
         title: Text('Appointment Details',style: TextStyle(
             color: Colors.white,

@@ -57,6 +57,38 @@ class ApointmentsData {
       return [];
     }
   }
+  Future<List<Data>> getWorkerAppointments({int page=1}) async {
+
+
+
+
+    try {
+      print('request ${Constants.DOMAIN}shop-staff/reservations?page=$page');
+      Response response = await Dio().get('${Constants.DOMAIN}shop-staff/reservations?page=$page',options: Options(headers: Constants.HEADER));
+
+
+      print(response.data);
+
+      if(response.statusCode>=400){
+        return [];
+
+      }else{
+       // final responseJson = json.decode(response.data);
+       // print('response json '+responseJson);
+        if(response.data['success'] as bool==false){
+          return [];
+        }else{
+          return ApointmentsData.fromJson(response.data as Map<String,dynamic>).data;
+        }
+      }
+
+
+
+    } catch (error) {
+      print(error);
+      return [];
+    }
+  }
 
   Future<bool> changeStatus(String status,String id) async {
 
@@ -93,7 +125,49 @@ class ApointmentsData {
       return false;
     }
   }
-  
+  Future<bool> acceptRejectAppointment(String status,String id) async {
+
+
+    Map<String,String> body = {
+      'booking_status':status,
+      'order_id':id,
+
+    };
+
+    try {
+      print('body is ${body.toString()}');
+      print('request is ${Constants.DOMAIN}shop-staff/approvetimes');
+
+      Response response = await Dio().post('${Constants.DOMAIN}shop-staff/approvetimes',data: body,options: Options(headers: Constants.HEADER));
+
+
+
+      print('response is ${response.data}');
+
+      if(response.statusCode>=400){
+        return false;
+
+      }else{
+       // final responseJson = json.decode(response.data);
+       // print('response json '+responseJson);
+        if(response.data['result'] as bool==false){
+          return false;
+        }else{
+          return true;
+        }
+      }
+
+
+
+    } catch (error) {
+      if(error is Exception)
+      print(error.toString());
+      else if(error is DioError)
+        print(error.message);
+      return false;
+    }
+  }
+
   
 }
 
@@ -117,6 +191,7 @@ class Data {
   String deliveryStatusString;
   String grandTotal;
   String date;
+  String booking_status;
   bool cancelRequest;
   bool canCancel;
   Shop shop;
@@ -129,6 +204,7 @@ class Data {
         this.code,
         this.userId,
         this.paymentType,
+        this.booking_status,
         this.shippingTypeString,
         this.paymentStatus,
         this.paymentStatusString,
@@ -148,6 +224,7 @@ class Data {
     code = json['code']as String;
     booking_staff_name = json['booking_staff_name']as String;
     paymentType = json['payment_type']as String;
+    booking_status = json['booking_status']as String;
     userId = json['user_id']as int;
     paymentStatus = json['payment_status']as String;
     paymentStatusString = json['payment_status_string']as String;

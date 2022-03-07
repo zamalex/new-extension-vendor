@@ -76,12 +76,14 @@ class User {
     this.name,
     this.avatar,
     this.email,
+    this.type,
     this.phone,
   });
 
   int id;
   String name;
   String avatar;
+  String type;
 
   String phone;
   String email;
@@ -91,6 +93,7 @@ class User {
     name: json['name'].toString(),
     avatar: json['avatar'].toString(),
     email: json['email'].toString(),
+    type: json['type'].toString(),
 
     phone: json['phone'].toString(),
   );

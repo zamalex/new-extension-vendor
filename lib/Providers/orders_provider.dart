@@ -1,4 +1,6 @@
 import 'package:flutter/foundation.dart';
+import 'package:salon_vendor/Providers/appoinment_model.dart';
+import 'package:salon_vendor/Providers/order_model.dart';
 
 import 'orders_model.dart';
 
@@ -10,9 +12,16 @@ class OrdersProvider extends ChangeNotifier{
 
   ];
 
+  int customPage = 0;
+  bool loadMore = true;
   List<Data> orders = [];
   List<Data> allOrders = [];
+  List<Data> workerAppointments = [];
 
+  initLoadMore(){
+    loadMore = true;
+    notifyListeners();
+  }
 
   bool loading = false;
 
@@ -66,6 +75,45 @@ class OrdersProvider extends ChangeNotifier{
       });
 
     notifyListeners();
+
+  }
+
+
+  getWorkerAppointments()async {
+      ++customPage;
+    if(customPage==1) {
+      loadMore=true;
+      loading = true;
+      notifyListeners();
+    }
+
+    await ApointmentsData().getWorkerAppointments(page: customPage).then((value){
+
+        loading = false;
+        if(customPage==1){
+          workerAppointments = value??[];
+        }else{
+          workerAppointments.addAll(value??[]);
+        }
+
+        if(value==null||value.isEmpty){
+          loadMore=false;
+        }
+
+      });
+
+    notifyListeners();
+
+  }
+
+  Future acceptRegectAppointment(String status,String id)async{
+    loading = true;
+    customPage=0;
+    notifyListeners();
+
+    await ApointmentsData().acceptRejectAppointment(status, id).then((value) => getWorkerAppointments());
+
+    return true;
 
   }
 
