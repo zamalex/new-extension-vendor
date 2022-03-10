@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
 import 'package:provider/provider.dart';
 import 'package:salon_vendor/Providers/appoinment_model.dart';
+import 'package:salon_vendor/Providers/constants.dart';
 import 'package:salon_vendor/Providers/orders_model.dart';
 import 'package:salon_vendor/Providers/datetime.dart';
 import 'package:salon_vendor/Providers/orders_provider.dart';
@@ -16,7 +17,28 @@ class AppointmentDetails extends StatefulWidget {
 }
 
 class _AppointmentDetailsState extends State<AppointmentDetails> {
-  changeStatus(String status){
+
+  showStatusesDialog(
+      BuildContext context){
+
+    showModalBottomSheet(isScrollControlled: true,builder: (context) =>Wrap(
+      children: List.generate(Constants.STATUSES.length, (index) => Column(
+        children: [
+          InkWell(
+              onTap: (){
+                Navigator.of(context).pop();
+                changeStatus(Constants.STATUSES[index]);
+              },
+              child: Container(margin: EdgeInsets.all(5),child: Text(Constants.STATUSES[index],style: TextStyle(fontSize: 18),))),
+          Divider()
+        ],
+      )),
+    ) , context: context,);
+
+  }
+
+
+  changeStatus(String statuss){
     String status='';
     switch(widget.order.deliveryStatus){
       case 'pending':
@@ -33,13 +55,23 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
         status='finished';
     }
 
+    if(statuss=='active')
+      statuss='on_the_way';
+    status = statuss;
     ApointmentsData().changeStatus(status, widget.order.id.toString()).then((value){
 
       if(value){
         setState(() {
-          widget.order.deliveryStatus = status;
+          widget.order.deliveryStatus = status=='on_the_way'?'active':status;
         });
       }
+
+      if( Constants.USER_TYPE=='staff') {
+
+        Provider.of<OrdersProvider>(context, listen: false).customPage=0;
+        Provider.of<OrdersProvider>(context, listen: false)
+            .getWorkerAppointments();
+      }else
       Provider.of<OrdersProvider>(context, listen: false).getAppointments(1);
 
     });
@@ -51,6 +83,7 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
   final dGrey = const Color.fromRGBO(184, 189, 194, 1);
 
   final mYellow = const Color.fromRGBO(93, 174, 255, 1);
+
 
   @override
   Widget build(BuildContext context) {
@@ -145,7 +178,7 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
                 ),
                 _iconText(
                     'assets/images/Document@3x.png',
-                    'Service code. ${widget.order.id}'),
+                    'Order no. ${widget.order.id}'),
                 SizedBox(
                   height: 10,
                 ),
@@ -241,7 +274,7 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      widget.order.deliveryStatus,
+                      widget.order.deliveryStatus=='on_the_way'?'active':widget.order.deliveryStatus,
                       style: TextStyle(color: mYellow),
                     ),
                     RichText(
@@ -398,7 +431,7 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
                         child: SizedBox(
                       height: 48,
                       child: ElevatedButton(
-                        onPressed: (){changeStatus(widget.order.deliveryStatus);},
+                        onPressed: (){/*changeStatus(widget.order.deliveryStatus);*/showStatusesDialog(context);},
                         child: Text(
                           'Change Status',
                           style: TextStyle(color: Colors.white),

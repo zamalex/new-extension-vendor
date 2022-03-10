@@ -88,6 +88,7 @@ class _SignInWidgetState extends State<SignInWidget> with SingleTickerProviderSt
     String token = (prefs.getString('token') ?? null);
     String type = (prefs.getString('type') ?? null);
     Constants.USER_TOKEN = token;
+    Constants.USER_TYPE=type;
 
     if(Constants.USER_TOKEN!=null&&type!=null){
       Future.delayed(Duration.zero).then((value){
@@ -146,7 +147,7 @@ void goHome(String type) {
            SharedPreferences prefs = await SharedPreferences.getInstance();
            await prefs.setString('token',  value.accessToken);
            await prefs.setString('type',  value.user.type);
-
+           Constants.USER_TYPE=value.user.type;
            goHome(value.user.type);
           Constants.USER_TOKEN = value.accessToken;
           }

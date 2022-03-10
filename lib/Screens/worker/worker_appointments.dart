@@ -118,7 +118,13 @@ class _WorkerAppointmentsListState extends State<WorkerAppointmentsList> {
               builder: (context, value, child) => value.loading?Center(child: CircularProgressIndicator(),): ListView.builder(
                 controller: _scrollController,
                 itemCount: value.workerAppointments.length,
-                itemBuilder: (context, index) => MyAppointmentItem(value.workerAppointments[index]),
+                itemBuilder: (context, index) =>InkWell
+                  (onTap: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AppointmentDetails(value.workerAppointments[index])),
+                  );
+                },child: MyAppointmentItem(value.workerAppointments[index])),
               ),
             )
 

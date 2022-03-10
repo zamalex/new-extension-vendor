@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:salon_vendor/Providers/orders_model.dart';
 import 'package:salon_vendor/Providers/orders_provider.dart';
@@ -98,9 +99,9 @@ class MyAppointmentItem extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 16, left: 8.0, bottom: 8),
                 child: Text(
-                  DateTime.parse(
-                      order.bookingDateTime.replaceAll('  ', ' '))
-                      .toLocalTimeString,
+                    DateFormat('hh:mm a').format(DateTime.parse(
+                        order.bookingDateTime.replaceAll('  ', ' ')))
+                      ,
                   style: TextStyle(
                     color: Color.fromRGBO(26, 26, 26, 1),
                     fontFamily: "Almarai",
@@ -139,7 +140,7 @@ class MyAppointmentItem extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           top: 5, left: 15, right: 14, bottom: 7),
                       child: Text(
-                        order.booking_status??'pending',
+                        order.deliveryStatus=='on_the_way'?'active':order.deliveryStatus,
                         textAlign: TextAlign.right,
                         style: TextStyle(
                           color: Color.fromRGBO(255, 255, 255, 1),

@@ -4,10 +4,15 @@ import 'package:salon_vendor/Providers/user_model.dart';
 class Constants {
   static const DOMAIN = "http://salon.badee.com.sa/api/v2/";
 
-  
+  static List<String> STATUSES = [
+    'pending',
+  'active'
+    ,'confirmed','finished',
+  ];
   //Global var
   static User CURRENT_USER = User();
   static String USER_TOKEN = null;
+  static String USER_TYPE = '';
   static String PLAYER_ID = "";
   static Color kPrimaryColor = Color.fromRGBO(174, 117, 106, 1);//Color.fromRGBO(118, 123, 128, 1);
   static var HEADER = {
