@@ -32,7 +32,7 @@ class ApointmentsData {
 
     try {
       print('request ${Constants.DOMAIN}shop-staff/orders?page=$page&order_type=$type');
-      Response response = await Dio().get('${Constants.DOMAIN}shop-staff/orders?page=$page&order_type=$type',options: Options(headers: Constants.HEADER));
+      Response response = await Dio().get('${Constants.DOMAIN}shop-staff/orders?page=$page&order_type=$type',options: Options(headers: Constants.getHeader()));
 
 
       print(response.data);
@@ -64,7 +64,7 @@ class ApointmentsData {
 
     try {
       print('request ${Constants.DOMAIN}shop-staff/reservations?page=$page');
-      Response response = await Dio().get('${Constants.DOMAIN}shop-staff/reservations?page=$page',options: Options(headers: Constants.HEADER));
+      Response response = await Dio().get('${Constants.DOMAIN}shop-staff/reservations?page=$page',options: Options(headers: Constants.getHeader()));
 
 
       print(response.data);
@@ -100,7 +100,7 @@ class ApointmentsData {
     };
 
     try {
-      Response response = await Dio().post('${Constants.DOMAIN}shop-staff/orders/$id/change-status',data: body,options: Options(headers: Constants.HEADER));
+      Response response = await Dio().post('${Constants.DOMAIN}shop-staff/orders/$id/change-status',data: body,options: Options(headers: Constants.getHeader()));
 
 
       print(response.data);
@@ -138,7 +138,7 @@ class ApointmentsData {
       print('body is ${body.toString()}');
       print('request is ${Constants.DOMAIN}shop-staff/approvetimes');
 
-      Response response = await Dio().post('${Constants.DOMAIN}shop-staff/approvetimes',data: body,options: Options(headers: Constants.HEADER));
+      Response response = await Dio().post('${Constants.DOMAIN}shop-staff/approvetimes',data: body,options: Options(headers: Constants.getHeader()));
 
 
 
@@ -196,12 +196,14 @@ class Data {
   bool canCancel;
   Shop shop;
   Order items;
+  ShippingAddress shippingAddress;
 
   Data(
       {this.id,
         this.orderType,
         this.bookingDateTime,
         this.code,
+        this.shippingAddress,
         this.userId,
         this.paymentType,
         this.booking_status,
@@ -242,11 +244,21 @@ class Data {
     canCancel = json['can_cancel']as bool;
     shop = json['shop'] != null ?  Shop.fromJson(json['shop'] as Map<String,dynamic>) : null;
     items = json['items'] != null ?  Order.fromJson(json['items']as Map<String,dynamic>) : null;
+    shippingAddress = json['shipping_address'] != null ?  ShippingAddress.fromJson(json['shipping_address']as Map<String,dynamic>) : null;
   }
 
 }
 
+class ShippingAddress{
+  String address;
+  ShippingAddress(
+  {this.address}
+      );
 
+  ShippingAddress.fromJson(Map<String, dynamic> json) {
+    address=json['address'];
+  }
+}
 
 class Shop {
   List<SalonData> data;
@@ -325,7 +337,7 @@ class OrderData {
 
   OrderData.fromJson(Map<String, dynamic> json) {
     orderType = json['order_type']as String;
-    productId = json['product_id']as int;
+    productId = json['product_id']==''?0:json['product_id']as int;
     productName = json['product_name']as String;
     price = json['price']as String;
     quantity = json['quantity']as int;

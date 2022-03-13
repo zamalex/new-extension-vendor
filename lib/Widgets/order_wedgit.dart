@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:salon_vendor/Providers/orders_model.dart';
 import 'package:salon_vendor/Screens/order/order_details.dart';
 import 'package:salon_vendor/Widgets/seperator_wedgit.dart';
@@ -74,18 +75,36 @@ class OrderWedgit extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 16, left: 8.0, bottom: 8),
-                child: Text(
-                  DateTime.parse(order.bookingDateTime.replaceAll('  ', ' ')).toLocalDateString,
-                  style: TextStyle(
-                    color: Color.fromRGBO(26, 26, 26, 1),
-                    fontFamily: "Almarai",
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16, left: 8.0, bottom: 8),
+                    child: Text(
+                      DateTime.parse(order.bookingDateTime.replaceAll('  ', ' ')).toLocalDateString,
+                      style: TextStyle(
+                        color: Color.fromRGBO(26, 26, 26, 1),
+                        fontFamily: "Almarai",
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                      ),
+                    ),
                   ),
-                ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16, left: 8.0, bottom: 8),
+                    child: Text(
+                      DateFormat('hh:mm a').format(DateTime.parse(order.bookingDateTime.replaceAll('  ', ' '))),
+                      style: TextStyle(
+                        color: Color.fromRGBO(26, 26, 26, 1),
+                        fontFamily: "Almarai",
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
+                ],
               ),
+
+
               // Flex(
               //     direction: Axis.vertical,
               //     children: [

@@ -6,17 +6,25 @@ import 'package:salon_vendor/Providers/orders_provider.dart';
 import 'package:salon_vendor/Screens/order/order_details.dart';
 import 'package:salon_vendor/Widgets/seperator_wedgit.dart';
 import 'package:salon_vendor/Providers/datetime.dart';
-class MyAppointmentItem extends StatelessWidget {
+class MyAppointmentItem extends StatefulWidget {
 
 
-  String services = '';
-  final mGrey = const Color.fromRGBO(174, 117, 106, 1);
   Data order;
   MyAppointmentItem(this.order);
+
+  @override
+  State<MyAppointmentItem> createState() => _MyAppointmentItemState();
+}
+
+class _MyAppointmentItemState extends State<MyAppointmentItem> {
+  String services = '';
+
+  final mGrey = const Color.fromRGBO(174, 117, 106, 1);
+
   @override
   Widget build(BuildContext context) {
 
-    order.items.data.forEach((element) {
+    widget.order.items.data.forEach((element) {
       services = services+element.productName+'\n';
     });
 
@@ -43,7 +51,7 @@ class MyAppointmentItem extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.only(right: 15.0, left: 15),
                       child: Text(
-                        order.id.toString(),
+                        widget.order.id.toString(),
                         style: TextStyle(
                           color: Color.fromRGBO(26, 26, 26, 1),
                           fontFamily: "Almarai",
@@ -57,7 +65,7 @@ class MyAppointmentItem extends StatelessWidget {
                     padding:
                     const EdgeInsets.only(right: 15.0, left: 15, top: 10),
                     child: Text(
-                      '${order.grandTotal} SAR',
+                      '${widget.order.grandTotal} SAR',
                       style: TextStyle(
                         color: Color.fromRGBO(26, 26, 26, 1),
                         fontFamily: "Almarai",
@@ -71,7 +79,7 @@ class MyAppointmentItem extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(right: 15.0, left: 15, top: 10),
                 child: Text(
-                  order.user_name??'',
+                  widget.order.user_name??'',
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     color: Color.fromRGBO(184, 189, 194, 1),
@@ -85,7 +93,7 @@ class MyAppointmentItem extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 16, left: 8.0, bottom: 8),
                 child: Text(
                   DateTime.parse(
-                      order.bookingDateTime.replaceAll('  ', ' '))
+                      widget.order.bookingDateTime.replaceAll('  ', ' '))
                       .toLocalDateString,
                   style: TextStyle(
                     color: Color.fromRGBO(26, 26, 26, 1),
@@ -100,7 +108,7 @@ class MyAppointmentItem extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 16, left: 8.0, bottom: 8),
                 child: Text(
                     DateFormat('hh:mm a').format(DateTime.parse(
-                        order.bookingDateTime.replaceAll('  ', ' ')))
+                        widget.order.bookingDateTime.replaceAll('  ', ' ')))
                       ,
                   style: TextStyle(
                     color: Color.fromRGBO(26, 26, 26, 1),
@@ -140,7 +148,7 @@ class MyAppointmentItem extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           top: 5, left: 15, right: 14, bottom: 7),
                       child: Text(
-                        order.deliveryStatus=='on_the_way'?'active':order.deliveryStatus,
+                        widget.order.deliveryStatus=='on_the_way'?'active':widget.order.deliveryStatus,
                         textAlign: TextAlign.right,
                         style: TextStyle(
                           color: Color.fromRGBO(255, 255, 255, 1),
@@ -166,7 +174,7 @@ class MyAppointmentItem extends StatelessWidget {
                           height: 48,
                           child: ElevatedButton(
                             onPressed:(){
-                              Provider.of<OrdersProvider>(context, listen: false).acceptRegectAppointment('Rejected', order.id.toString());
+                              Provider.of<OrdersProvider>(context, listen: false).acceptRegectAppointment('Rejected', widget.order.id.toString());
                             },
                             child: Text(
                               'Cancel',
@@ -190,7 +198,8 @@ class MyAppointmentItem extends StatelessWidget {
                           height: 48,
                           child: ElevatedButton(
                             onPressed: (){
-                              Provider.of<OrdersProvider>(context, listen: false).acceptRegectAppointment('Accepted', order.id.toString());
+                              Provider.of<OrdersProvider>(context, listen: false).acceptRegectAppointment('Accepted', widget.order.id.toString());
+
                             },
                             child: Text(
                               'Accept',

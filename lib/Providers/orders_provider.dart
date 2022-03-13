@@ -111,6 +111,9 @@ class OrdersProvider extends ChangeNotifier{
     customPage=0;
     notifyListeners();
 
+    if(status=='Accepted')
+      await ApointmentsData().changeStatus('confirmed',id).then((value) => getWorkerAppointments());
+    else
     await ApointmentsData().acceptRejectAppointment(status, id).then((value) => getWorkerAppointments());
 
     return true;

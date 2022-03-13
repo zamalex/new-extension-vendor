@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
 import 'package:provider/provider.dart';
+import 'package:salon_vendor/Providers/constants.dart';
 import 'package:salon_vendor/Providers/orders_model.dart';
 import 'package:salon_vendor/Providers/datetime.dart';
 import 'package:salon_vendor/Providers/orders_provider.dart';
@@ -21,7 +22,29 @@ class _OrderDetailsState extends State<OrderDetails> {
   final dGrey = const Color.fromRGBO(184, 189, 194, 1);
 
   final mYellow = const Color.fromRGBO(255, 200, 89, 1);
-  changeStatus(String status){
+
+
+  showStatusesDialog(
+      BuildContext context){
+
+    showModalBottomSheet(isScrollControlled: true,builder: (context) =>Wrap(
+      children: List.generate(Constants.STATUSES_ORDER.length, (index) => Column(
+        children: [
+          InkWell(
+              onTap: (){
+                Navigator.of(context).pop();
+                changeStatus(Constants.STATUSES_ORDER[index]);
+              },
+              child: Container(margin: EdgeInsets.all(5),child: Text(Constants.STATUSES_ORDER[index],style: TextStyle(fontSize: 18),))),
+          Divider()
+        ],
+      )),
+    ) , context: context,);
+
+  }
+
+
+  changeStatus(String statuss){
     String status='';
     switch(widget.order.deliveryStatus){
       case 'pending':
@@ -40,6 +63,8 @@ class _OrderDetailsState extends State<OrderDetails> {
         status='delivered';
 
     }
+
+    status= statuss.replaceAll(' ', '_');
 
     ApointmentsData().changeStatus(status, widget.order.id.toString()).then((value){
 
@@ -103,7 +128,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                   height: 5,
                 ),
                 Text(
-                  widget.order.user_address ?? '',
+                  widget.order.shippingAddress.address ?? '',
                   style: TextStyle(color: Colors.black),
                 ),
                 SizedBox(
@@ -303,7 +328,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '${widget.order.deliveryStatus}',
+                      '${widget.order.deliveryStatus=='on_the_way'?'on the way':widget.order.deliveryStatus}',
                       style: TextStyle(color: mYellow),
                     ),
                     RichText(
@@ -342,6 +367,27 @@ class _OrderDetailsState extends State<OrderDetails> {
                 ),
                 Divider(
                   color: Colors.grey,
+                ),
+                SizedBox(height: 10,),
+                Padding(
+                    padding: const EdgeInsets.only(top: 16, left: 0.0, bottom: 8),
+                    child: Column(children:
+                    widget.order.items.data.map((e){
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            e.productName,
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          Text(
+                            '${e.price} SAR',
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ],
+                      );
+                    }).toList()
+                      ,)
                 ),
                 SizedBox(
                   height: 10,
@@ -444,7 +490,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         child: SizedBox(
                       height: 48,
                       child: ElevatedButton(
-                        onPressed: (){changeStatus(widget.order.deliveryStatus);},
+                        onPressed: (){/*changeStatus(widget.order.deliveryStatus);*/showStatusesDialog(context);},
                         child: Text(
                           'Change Status',
                           style: TextStyle(color: Colors.white),

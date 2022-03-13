@@ -17,6 +17,7 @@ class AppointmentDetails extends StatefulWidget {
 }
 
 class _AppointmentDetailsState extends State<AppointmentDetails> {
+  String services='';
 
   showStatusesDialog(
       BuildContext context){
@@ -87,6 +88,9 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
 
   @override
   Widget build(BuildContext context) {
+    widget.order.items.data.forEach((element) {
+      services = services+element.productName+'\n';
+    });
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(174, 117, 106, 1),
@@ -125,7 +129,7 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
                 SizedBox(
                   height: 10,
                 ),
-                _iconText(
+                /*_iconText(
                    'assets/images/Location@3x.png',
                     'Address'),
                 SizedBox(
@@ -137,7 +141,7 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
                 ),
                 SizedBox(
                   height: 5,
-                ),
+                ),*/
                 /*SizedBox(
                   height: 10,
                 ),
@@ -321,6 +325,26 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
                     ),
                   ),*/
                 ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 16, left: 8.0, bottom: 8),
+                  child: Column(children:
+                    widget.order.items.data.map((e){
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            e.productName,
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          Text(
+                            '${e.price} SAR',
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ],
+                      );
+                    }).toList()
+                  ,)
+                ),
                 SizedBox(
                   height: 20,
                 ),
@@ -343,6 +367,7 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
                 SizedBox(
                   height: 10,
                 ),
+
                 Divider(
                   color: Colors.grey,
                 ),

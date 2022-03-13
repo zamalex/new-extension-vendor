@@ -9,6 +9,12 @@ class Constants {
   'active'
     ,'confirmed','finished',
   ];
+
+  static List<String> STATUSES_ORDER = [
+    'pending',
+  'on the way'
+    ,'confirmed','finished',
+  ];
   //Global var
   static User CURRENT_USER = User();
   static String USER_TOKEN = null;
@@ -20,6 +26,14 @@ class Constants {
     // "Authorization": "bearer " + Constants.USER_TOKEN,
     "Authorization": "Bearer " + Constants.USER_TOKEN,
   };
+
+ static Map<String,dynamic> getHeader(){
+    return {
+      "Accept": "application/json",
+      // "Authorization": "bearer " + Constants.USER_TOKEN,
+      "Authorization": "Bearer " + Constants.USER_TOKEN,
+    };
+  }
 
   static var LOCATION = {"latitude": "0", "longitude": "0"};
   static var NO_INTERNET_CONNECTION = 'لا يوجد انترنت';
