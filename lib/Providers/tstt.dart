@@ -325,7 +325,7 @@ class Invoice {
               pw.Container(
                 margin: const pw.EdgeInsets.only(top: 20, bottom: 8),
                 child: pw.Text(
-                  'Payment Method:',
+                  paymentInfo==null||paymentInfo.isEmpty?'':'Payment Method:',
                   style: pw.TextStyle(
                     color: baseColor,
                     fontWeight: pw.FontWeight.bold,

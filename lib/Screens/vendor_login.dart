@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:salon_vendor/Providers/constants.dart';
 import 'package:salon_vendor/Providers/loginmodel.dart';
 import 'package:salon_vendor/Screens/home_screen.dart';
@@ -115,9 +116,16 @@ class _SignInWidgetState extends State<SignInWidget> with SingleTickerProviderSt
     _controller.dispose();
     super.dispose();
   }
-void goHome(String type) {
+void goHome(String type) async{
+  final status = await OneSignal.shared.getDeviceState();
+  final String osUserID = status.userId;
 
-      Navigator.pushReplacement(
+  print('onesignal id $osUserID');
+  if(osUserID!=null)
+    LoginModel().sendPlayerID(osUserID);
+
+
+  Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) =>type!='staff'?Home(): WorkerAppointmentsList()),
       );

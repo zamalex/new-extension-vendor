@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'package:salon_vendor/Providers/constants.dart';
 
 import 'http_manager.dart';
@@ -65,6 +66,39 @@ class LoginModel {
     } catch (error) {
       print(error);
       return null;
+    }
+  }
+
+  Future sendPlayerID(String id) async {
+
+    Map<String, String> headers = {
+      'Authorization': 'Bearer ${Constants.USER_TOKEN}',
+      'Content-Type': 'application/json',
+      'Current-Locale':Intl.getCurrentLocale()
+    };
+
+    Map<String,dynamic> body = {
+      'player_id':id,
+    };
+
+
+    try {
+      var response = await http.post(
+          Uri.parse('${Constants.DOMAIN}notifications/subscribe'),
+          headers: headers,
+          body:jsonEncode(body)
+      );
+
+      print('request  is '+'${Constants.DOMAIN}notifications/subscribe');
+      print('response  is '+response.body);
+      print('body  is '+body.toString());
+
+
+      return true;
+
+    } catch (error) {
+      print(error);
+      return false;
     }
   }
 

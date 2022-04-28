@@ -1,6 +1,7 @@
 //import 'package:firebase_core/firebase_core.dart';
 //import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:salon_vendor/Providers/constants.dart';
 import 'package:salon_vendor/Providers/orders_provider.dart';
 import 'package:salon_vendor/Screens/appoinment/appointment_list.dart';
@@ -13,6 +14,42 @@ import 'Screens/Notification/NotificationList.dart';
 
 Future<void> main()  {
   //await Firebase.initializeApp();
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+  OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
+
+  OneSignal.shared.setAppId("a72e072e-86c4-443f-9001-e8a8d82b0d86");
+
+// The promptForPushNotificationsWithUserResponse function will show the iOS push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission
+  OneSignal.shared.promptUserForPushNotificationPermission().then((accepted) {
+    print("Accepted permission: $accepted");
+  });
+
+  OneSignal.shared.setNotificationWillShowInForegroundHandler((OSNotificationReceivedEvent event) {
+    // Will be called whenever a notification is received in foreground
+    // Display Notification, pass null param for not displaying the notification
+    event.complete(event.notification);
+  });
+
+  OneSignal.shared.setNotificationOpenedHandler((OSNotificationOpenedResult result) {
+    // Will be called whenever a notification is opened/button pressed.
+  });
+
+  OneSignal.shared.setPermissionObserver((OSPermissionStateChanges changes) {
+    // Will be called whenever the permission changes
+    // (ie. user taps Allow on the permission prompt in iOS)
+  });
+
+  OneSignal.shared.setSubscriptionObserver((OSSubscriptionStateChanges changes) {
+    // Will be called whenever the subscription changes
+    // (ie. user gets registered with OneSignal and gets a user ID)
+  });
+
+  OneSignal.shared.setEmailSubscriptionObserver((OSEmailSubscriptionStateChanges emailChanges) {
+    // Will be called whenever then user's email subscription changes
+    // (ie. OneSignal.setEmail(email) is called and the user gets registered
+  });
 
   runApp(MyApp());
 }

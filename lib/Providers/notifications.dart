@@ -1,40 +1,23 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
-import 'package:salon_vendor/Providers/http_manager.dart';
 
 import 'constants.dart';
+import 'http_manager.dart';
 
+class NotificationResponse {
+  Data data;
+  int statusCode;
+  String message;
 
+  NotificationResponse({this.data, this.statusCode, this.message});
 
-class Notifications {
-  int id;
-  int price;
-  String title;
-  String description;
-  String sentAt;
-  Info options;
-
-  Notifications(
-      {this.id,
-        this.price,
-        this.title,
-        this.description,
-        this.sentAt,
-        this.options});
-
-  Notifications.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    price = json['price'];
-    title = json['title'];
-    description = json['description'];
-    sentAt = json['sent_at'];
-    options =
-    json['options'] != null ?  Info.fromJson(json['options']) : null;
+  NotificationResponse.fromJson(Map<String, dynamic> json) {
+    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    statusCode = json['status_code'];
+    message = json['message'];
   }
 
 
-  Future<List<Notifications>> getNotifications({int page=1}) async {
+  Future<List<NotificationData>> getNotifications({int page=1}) async {
 
     try {
 
@@ -48,9 +31,9 @@ class Notifications {
 
       }else{
         // final responseJson = json.decode(response.data);
-        // print('response json '+responseJson);
+        print('response json '+response.data.toString());
 
-          return List<Notifications>.from(response.data.map((i) => Notifications.fromJson(i)));
+        return NotificationResponse.fromJson(response.data).data.notifications;
 
       }
 
@@ -61,20 +44,41 @@ class Notifications {
       return [];
     }
   }
+}
+
+class Data {
+  List<NotificationData> notifications;
+
+  Data({this.notifications});
+
+  Data.fromJson(Map<String, dynamic> json) {
+    if (json['data'] != null) {
+      notifications = <NotificationData>[];
+      json['data'].forEach((v) {
+        notifications.add(new NotificationData.fromJson(v));
+      });
+    }
+  }
+
 
 }
 
-class Info {
-  int orderId;
-  String orderType;
-  String userName;
+class NotificationData {
+  int id;
+  String title;
+  String content;
+  String createdAt;
+  int seen;
 
-  Info({this.orderId, this.orderType, this.userName});
+  NotificationData({this.id, this.title, this.content, this.createdAt, this.seen});
 
-  Info.fromJson(Map<String, dynamic> json) {
-    orderId = json['order_id'];
-    orderType = json['order_type'];
-    userName = json['user_name'];
+  NotificationData.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    title = json['title'];
+    content = json['content'];
+    createdAt = json['created_at'];
+    seen = json['seen'];
   }
+
 
 }

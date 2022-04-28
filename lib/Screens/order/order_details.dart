@@ -66,7 +66,7 @@ class _OrderDetailsState extends State<OrderDetails> {
 
     status= statuss.replaceAll(' ', '_');
 
-    ApointmentsData().changeStatus(status, widget.order.id.toString()).then((value){
+    ApointmentsData().changeStatus(status, widget.order.id.toString(),widget.order.paymentStatus).then((value){
 
       if(value){
         setState(() {

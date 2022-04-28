@@ -59,7 +59,7 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
     if(statuss=='active')
       statuss='on_the_way';
     status = statuss;
-    ApointmentsData().changeStatus(status, widget.order.id.toString()).then((value){
+    ApointmentsData().changeStatus(status, widget.order.id.toString(),widget.order.paymentStatus).then((value){
 
       if(value){
         setState(() {
@@ -161,13 +161,17 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
                 SizedBox(
                   height: 10,
                 ),
+                if(Constants.USER_TYPE!='seller')
                 _iconText(
                    'assets/images/Call@3x.png',
                     'Phone number'),
                 SizedBox(
                   height: 5,
                 ),
-                Text(
+
+
+                if(Constants.USER_TYPE!='seller')
+                  Text(
                   widget.order.user_phone,
                   style: TextStyle(color: Colors.black),
                 ),

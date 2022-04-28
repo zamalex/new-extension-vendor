@@ -90,12 +90,12 @@ class ApointmentsData {
     }
   }
 
-  Future<bool> changeStatus(String status,String id) async {
+  Future<bool> changeStatus(String status,String id,String payment) async {
 
 
     Map<String,String> body = {
       'order_status':status,
-      'payment_status':'unpaid',
+      'payment_status':payment??'Unpaid',
 
     };
 

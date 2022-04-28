@@ -198,7 +198,7 @@ class _MyAppointmentItemState extends State<MyAppointmentItem> {
                           height: 48,
                           child: ElevatedButton(
                             onPressed: (){
-                              Provider.of<OrdersProvider>(context, listen: false).acceptRegectAppointment('Accepted', widget.order.id.toString());
+                              Provider.of<OrdersProvider>(context, listen: false).acceptRegectAppointment('Accepted', widget.order.id.toString(),payment:widget.order.paymentStatus);
 
                             },
                             child: Text(

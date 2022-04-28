@@ -106,13 +106,13 @@ class OrdersProvider extends ChangeNotifier{
 
   }
 
-  Future acceptRegectAppointment(String status,String id)async{
+  Future acceptRegectAppointment(String status,String id,{String payment})async{
     loading = true;
     customPage=0;
     notifyListeners();
 
     if(status=='Accepted')
-      await ApointmentsData().changeStatus('confirmed',id).then((value) => getWorkerAppointments());
+      await ApointmentsData().changeStatus('confirmed',id,payment).then((value) => getWorkerAppointments());
     else
     await ApointmentsData().acceptRejectAppointment(status, id).then((value) => getWorkerAppointments());
 

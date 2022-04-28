@@ -4,10 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:salon_vendor/Providers/notification_model.dart';
 import 'package:salon_vendor/Providers/notifications.dart';
 import 'package:salon_vendor/Widgets/notification_wedgit.dart';
-// import 'package:takafol/Providers/constants.dart';
-// import 'package:takafol/Utilities/static_functions.dart';
-// import 'package:takafol/Widgets/loginCustomeAlert.dart';
-// import 'package:takafol/Widgets/notification_wedgit.dart';
+
 
 class UserNotificationsList extends StatefulWidget {
   @override
@@ -15,17 +12,9 @@ class UserNotificationsList extends StatefulWidget {
 }
 
 class _UserNotificationsListState extends State<UserNotificationsList> {
-  List<Notifications> notifications = [];
+  List<NotificationData> notifications = [];
   bool loading = false;
-  List<UserNotification> userNotifications = [
-    UserNotification(
-        id: 1,
-        title: "Appointment Request",
-        time: "tue, dec 20, 2020 at 15:30",
-        userName: "fatma mohamed",
-        serviceCode: "#787397",
-        price: "60.00 SAR")
-  ];
+
   // List<UserNotification> userNotifications = <UserNotification>(new UserNotification(id:1,title:'test title', time:'12',content:'text content',isRead: false));
   var _init = true;
   var isNotificationLoaded = true;
@@ -77,7 +66,7 @@ class _UserNotificationsListState extends State<UserNotificationsList> {
     setState(() {
       loading = true;
     });
-    Notifications().getNotifications().then((value){
+    NotificationResponse().getNotifications().then((value){
 
       setState(() {
         notifications = value;
@@ -115,7 +104,7 @@ class _UserNotificationsListState extends State<UserNotificationsList> {
       ),
       body: !loading
           ? ListView.builder(
-              itemCount: userNotifications.length,
+              itemCount: notifications.length,
               itemBuilder: (context, index) => UserNotificationWedgit(
                  notifications[index]),
             )
