@@ -9,6 +9,11 @@ class Constants {
   'active'
     ,'confirmed','finished',
   ];
+  static List<String> STAFF_STATUSES = [
+    'pending',
+  'active'
+    ,'finished',
+  ];
 
   static List<String> STATUSES_ORDER = [
     'pending',

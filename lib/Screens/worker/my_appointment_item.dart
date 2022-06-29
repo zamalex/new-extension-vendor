@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:salon_vendor/Providers/constants.dart';
 import 'package:salon_vendor/Providers/orders_model.dart';
 import 'package:salon_vendor/Providers/orders_provider.dart';
+import 'package:salon_vendor/Screens/appoinment/appointment_details.dart';
 import 'package:salon_vendor/Screens/order/order_details.dart';
 import 'package:salon_vendor/Widgets/seperator_wedgit.dart';
 import 'package:salon_vendor/Providers/datetime.dart';
@@ -20,6 +22,67 @@ class _MyAppointmentItemState extends State<MyAppointmentItem> {
   String services = '';
 
   final mGrey = const Color.fromRGBO(174, 117, 106, 1);
+
+  showStatusesDialog(
+      BuildContext context){
+
+    if(Constants.USER_TYPE=='staff')
+      Constants.STATUSES = Constants.STAFF_STATUSES;
+    showModalBottomSheet(isScrollControlled: true,builder: (context) =>Wrap(
+      children: List.generate(Constants.STATUSES.length, (index) => Column(
+        children: [
+          InkWell(
+              onTap: (){
+                Navigator.of(context).pop();
+                changeStatus(Constants.STATUSES[index]);
+              },
+              child: Container(margin: EdgeInsets.all(5),child: Text(Constants.STATUSES[index],style: TextStyle(fontSize: 18),))),
+          Divider()
+        ],
+      )),
+    ) , context: context,);
+
+  }
+
+  changeStatus(String statuss){
+    String status='';
+    switch(widget.order.deliveryStatus){
+      case 'pending':
+        status='confirmed';
+        break;
+      case 'confirmed':
+      case 'on_the_way':
+        status='finished';
+        break;
+      case 'finished':
+        status='finished';
+        break;
+      default:
+        status='finished';
+    }
+
+    if(statuss=='active')
+      statuss='on_the_way';
+    status = statuss;
+    ApointmentsData().changeStatus(status, widget.order.id.toString(),widget.order.paymentStatus).then((value){
+
+      if(value){
+        setState(() {
+          widget.order.deliveryStatus = status=='on_the_way'?'active':status;
+        });
+      }
+
+      if( Constants.USER_TYPE=='staff') {
+
+        Provider.of<OrdersProvider>(context, listen: false).customPage=0;
+        Provider.of<OrdersProvider>(context, listen: false)
+            .getWorkerAppointments();
+      }else
+        Provider.of<OrdersProvider>(context, listen: false).getAppointments(1);
+
+    });
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -174,10 +237,14 @@ class _MyAppointmentItemState extends State<MyAppointmentItem> {
                           height: 48,
                           child: ElevatedButton(
                             onPressed:(){
-                              Provider.of<OrdersProvider>(context, listen: false).acceptRegectAppointment('Rejected', widget.order.id.toString());
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => AppointmentDetails(widget.order)),
+                              );
+                              //Provider.of<OrdersProvider>(context, listen: false).acceptRegectAppointment('Rejected', widget.order.id.toString());
                             },
                             child: Text(
-                              'Cancel',
+                              'View',
                               style: TextStyle(color: mGrey),
                             ),
                             style: ButtonStyle(
@@ -198,11 +265,11 @@ class _MyAppointmentItemState extends State<MyAppointmentItem> {
                           height: 48,
                           child: ElevatedButton(
                             onPressed: (){
-                              Provider.of<OrdersProvider>(context, listen: false).acceptRegectAppointment('Accepted', widget.order.id.toString(),payment:widget.order.paymentStatus);
-
+                             // Provider.of<OrdersProvider>(context, listen: false).acceptRegectAppointment('Accepted', widget.order.id.toString(),payment:widget.order.paymentStatus);
+                              showStatusesDialog(context);
                             },
                             child: Text(
-                              'Accept',
+                              'Change Status',
                               style: TextStyle(color: Colors.white),
                             ),
                             style: ButtonStyle(

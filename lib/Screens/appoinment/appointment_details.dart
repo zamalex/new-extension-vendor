@@ -22,6 +22,8 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
   showStatusesDialog(
       BuildContext context){
 
+   if(Constants.USER_TYPE=='staff')
+     Constants.STATUSES = Constants.STAFF_STATUSES;
     showModalBottomSheet(isScrollControlled: true,builder: (context) =>Wrap(
       children: List.generate(Constants.STATUSES.length, (index) => Column(
         children: [
@@ -161,7 +163,7 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
                 SizedBox(
                   height: 10,
                 ),
-                if(Constants.USER_TYPE!='seller')
+                if(Constants.USER_TYPE!='staff')
                 _iconText(
                    'assets/images/Call@3x.png',
                     'Phone number'),
@@ -170,7 +172,7 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
                 ),
 
 
-                if(Constants.USER_TYPE!='seller')
+                if(Constants.USER_TYPE!='staff')
                   Text(
                   widget.order.user_phone,
                   style: TextStyle(color: Colors.black),
