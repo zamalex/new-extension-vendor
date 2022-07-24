@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:new_version/new_version.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:salon_vendor/Providers/constants.dart';
 import 'package:salon_vendor/Providers/loginmodel.dart';
@@ -106,6 +107,17 @@ class _SignInWidgetState extends State<SignInWidget> with SingleTickerProviderSt
     _textPassController.text = '';
 
     _title = widget.title ?? '';
+
+    Future.delayed(Duration.zero).then((value){
+      try{
+        final newVersion = NewVersion(context: context);
+
+        newVersion.showAlertIfNecessary();
+
+        print(newVersion.iOSId??'');
+
+      }catch(e){}
+    });
 
     checkToken();
     super.initState();
