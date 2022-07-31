@@ -1,8 +1,12 @@
 
+import 'dart:io';
+
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:new_version/new_version.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:salon_vendor/Providers/constants.dart';
 import 'package:salon_vendor/Providers/loginmodel.dart';
 import 'package:salon_vendor/Screens/home_screen.dart';
@@ -11,6 +15,7 @@ import 'package:salon_vendor/vendor/text_field.dart';
 import 'package:salon_vendor/vendor/theme_button.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 class VendorLogin extends StatefulWidget {
@@ -99,10 +104,70 @@ class _SignInWidgetState extends State<SignInWidget> with SingleTickerProviderSt
     }
   }
 
+  checkUpdate()async{
+
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+
+    String packageName = packageInfo.packageName;
+    String version = packageInfo.version;
+    String buildNumber = packageInfo.buildNumber;
+
+    String ref = 'android';
+    if(Platform.isAndroid)
+      ref='android';
+    else
+      ref='ios';
+    FirebaseDatabase.instance.ref(ref).once().then((value){
+      print('newest is ${value.snapshot.value}');
+      print('current is ${buildNumber}');
+      if(value==null)
+        return;
+      int newest = int.parse(value.snapshot.value.toString());
+
+      if(newest>int.parse(buildNumber)){
+        print('new update available');
+        showDialog(
+          barrierDismissible: false,
+          context: context,
+          builder: (BuildContext context) {
+            return alert;
+          },
+        );
+
+        /* UI.showCustomDialog(context,title: 'New version available',message: 'Please Update to the Latest Version', actions: [ElevatedButton(onPressed:(){
+
+          if (Platform.isAndroid) {
+            launch("https://play.google.com/store/apps/details?id=$packageName");
+          } else if (Platform.isIOS) {
+            launch("market://details?id=$packageName");
+          }
+        }, child: Text('Update'))]);*/
+      }
+
+    });
+
+  }
+  AlertDialog alert = AlertDialog(
+    title: Text("New Version Available"),
+    content: Text("Please Update to the Latest Version"),
+    actions: [
+      ElevatedButton(onPressed: ()async{
+        PackageInfo packageInfo = await PackageInfo.fromPlatform();
+
+        String packageName = packageInfo.packageName;
+
+        if (Platform.isAndroid) {
+          launch("https://play.google.com/store/apps/details?id=$packageName");
+        } else if (Platform.isIOS) {
+          launch("market://details?id=$packageName");
+        }
+      }, child: Text('Update')),
+    ],
+  );
   @override
   void initState() {
     _controller = AnimationController(vsync: this);
-
+    checkUpdate();
     _textEmailController.text = '';
     _textPassController.text = '';
 
