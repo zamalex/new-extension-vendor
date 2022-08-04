@@ -41,10 +41,11 @@ dependencies:
   onesignal_flutter: ^3.0.0
   new_version: ^0.0.6
   firebase_core: any
-  firebase_crashlytics: any
+  #firebase_crashlytics: any
   firebase_database: ^9.0.20
   url_launcher: ^6.1.5
   package_info_plus: ^1.4.3
+
 
 dev_dependencies:
   change_app_package_name: ^1.0.0
