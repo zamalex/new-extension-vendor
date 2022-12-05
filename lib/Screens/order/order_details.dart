@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
 import 'package:provider/provider.dart';
-import 'package:salon_vendor/Providers/constants.dart';
-import 'package:salon_vendor/Providers/orders_model.dart';
-import 'package:salon_vendor/Providers/datetime.dart';
-import 'package:salon_vendor/Providers/orders_provider.dart';
-import 'package:salon_vendor/Providers/tstt.dart';
+import 'package:extension_vendor/Providers/constants.dart';
+import 'package:extension_vendor/Providers/orders_model.dart';
+import 'package:extension_vendor/Providers/datetime.dart';
+import 'package:extension_vendor/Providers/orders_provider.dart';
+import 'package:extension_vendor/Providers/tstt.dart';
 
 class OrderDetails extends StatefulWidget {
   Data order;
@@ -17,7 +17,7 @@ class OrderDetails extends StatefulWidget {
 }
 
 class _OrderDetailsState extends State<OrderDetails> {
-  final mGrey = const Color.fromRGBO(174, 117, 106, 1);
+  final mGrey = const  Color.fromRGBO(127, 71, 150, 1);
 
   final dGrey = const Color.fromRGBO(184, 189, 194, 1);
 
@@ -81,7 +81,7 @@ class _OrderDetailsState extends State<OrderDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(174, 117, 106, 1),
+        backgroundColor: const  Color.fromRGBO(127, 71, 150, 1),
         iconTheme: const IconThemeData(color: Colors.white),
         title: Text(
           'Order Details',

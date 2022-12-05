@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:salon_vendor/Providers/constants.dart';
+import 'package:extension_vendor/Providers/constants.dart';
 
 
 class HttpManager {

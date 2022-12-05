@@ -2,14 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:salon_vendor/Providers/appoinment_model.dart';
-import 'package:salon_vendor/Providers/notification_model.dart';
-import 'package:salon_vendor/Providers/order_model.dart';
-import 'package:salon_vendor/Providers/orders_model.dart';
-import 'package:salon_vendor/Providers/orders_provider.dart';
-import 'package:salon_vendor/Screens/order/order_details.dart';
-import 'package:salon_vendor/Widgets/notification_wedgit.dart';
-import 'package:salon_vendor/Widgets/order_wedgit.dart';
+import 'package:extension_vendor/Providers/appoinment_model.dart';
+import 'package:extension_vendor/Providers/notification_model.dart';
+import 'package:extension_vendor/Providers/order_model.dart';
+import 'package:extension_vendor/Providers/orders_model.dart';
+import 'package:extension_vendor/Providers/orders_provider.dart';
+import 'package:extension_vendor/Screens/order/order_details.dart';
+import 'package:extension_vendor/Widgets/notification_wedgit.dart';
+import 'package:extension_vendor/Widgets/order_wedgit.dart';
 // import 'package:takafol/Providers/constants.dart';
 // import 'package:takafol/Utilities/static_functions.dart';
 // import 'package:takafol/Widgets/loginCustomeAlert.dart';
@@ -132,7 +132,7 @@ class _OrderListState extends State<OrderList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(174, 117, 106, 1),
+        backgroundColor:  Color.fromRGBO(127, 71, 150, 1),
         title: Text(
           'Orders',
           style: TextStyle(
@@ -145,7 +145,7 @@ class _OrderListState extends State<OrderList> {
       body: Column(
         children: [
           new Container(
-            color: Color.fromRGBO(174, 117, 106, 1),
+            color:  Color.fromRGBO(127, 71, 150, 1),
             child: new Padding(
               padding: const EdgeInsets.all(8.0),
               child: new Card(

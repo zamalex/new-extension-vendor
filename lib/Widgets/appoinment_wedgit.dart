@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:salon_vendor/Widgets/seperator_wedgit.dart';
+import 'package:extension_vendor/Widgets/seperator_wedgit.dart';
 
 class OrderWedgit extends StatelessWidget {
   final String status;

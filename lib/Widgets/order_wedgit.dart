@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:salon_vendor/Providers/orders_model.dart';
-import 'package:salon_vendor/Screens/order/order_details.dart';
-import 'package:salon_vendor/Widgets/seperator_wedgit.dart';
-import 'package:salon_vendor/Providers/datetime.dart';
+import 'package:extension_vendor/Providers/orders_model.dart';
+import 'package:extension_vendor/Screens/order/order_details.dart';
+import 'package:extension_vendor/Widgets/seperator_wedgit.dart';
+import 'package:extension_vendor/Providers/datetime.dart';
 class OrderWedgit extends StatelessWidget {
  Data order;
   Future<void> Function() onTapFunc;

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:salon_vendor/Providers/constants.dart';
-import 'package:salon_vendor/Providers/orders_model.dart';
-import 'package:salon_vendor/Providers/orders_provider.dart';
-import 'package:salon_vendor/Screens/appoinment/appointment_details.dart';
-import 'package:salon_vendor/Screens/order/order_details.dart';
-import 'package:salon_vendor/Widgets/seperator_wedgit.dart';
-import 'package:salon_vendor/Providers/datetime.dart';
+import 'package:extension_vendor/Providers/constants.dart';
+import 'package:extension_vendor/Providers/orders_model.dart';
+import 'package:extension_vendor/Providers/orders_provider.dart';
+import 'package:extension_vendor/Screens/appoinment/appointment_details.dart';
+import 'package:extension_vendor/Screens/order/order_details.dart';
+import 'package:extension_vendor/Widgets/seperator_wedgit.dart';
+import 'package:extension_vendor/Providers/datetime.dart';
 class MyAppointmentItem extends StatefulWidget {
 
 
@@ -21,7 +21,7 @@ class MyAppointmentItem extends StatefulWidget {
 class _MyAppointmentItemState extends State<MyAppointmentItem> {
   String services = '';
 
-  final mGrey = const Color.fromRGBO(174, 117, 106, 1);
+  final mGrey = const  Color.fromRGBO(127, 71, 150, 1);
 
   showStatusesDialog(
       BuildContext context){

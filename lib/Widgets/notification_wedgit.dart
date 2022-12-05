@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:salon_vendor/Providers/notifications.dart';
-import 'package:salon_vendor/Providers/datetime.dart';
+import 'package:extension_vendor/Providers/notifications.dart';
+import 'package:extension_vendor/Providers/datetime.dart';
 class UserNotificationWedgit extends StatelessWidget {
   NotificationData item;
   UserNotificationWedgit(this.item

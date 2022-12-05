@@ -6,11 +6,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
-import 'package:salon_vendor/Providers/constants.dart';
-import 'package:salon_vendor/Providers/orders_provider.dart';
-import 'package:salon_vendor/Screens/appoinment/appointment_list.dart';
-import 'package:salon_vendor/Screens/home_screen.dart';
-import 'package:salon_vendor/Screens/vendor_login.dart';
+import 'package:extension_vendor/Providers/constants.dart';
+import 'package:extension_vendor/Providers/orders_provider.dart';
+import 'package:extension_vendor/Screens/appoinment/appointment_list.dart';
+import 'package:extension_vendor/Screens/home_screen.dart';
+import 'package:extension_vendor/Screens/vendor_login.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -30,7 +30,7 @@ Future<void> main()  async {
 
   OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
 
-  OneSignal.shared.setAppId("a72e072e-86c4-443f-9001-e8a8d82b0d86");
+  OneSignal.shared.setAppId("744e8b47-813d-4439-9bec-4534573ab0e8");
 
 // The promptForPushNotificationsWithUserResponse function will show the iOS push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission
   OneSignal.shared.promptUserForPushNotificationPermission().then((accepted) {

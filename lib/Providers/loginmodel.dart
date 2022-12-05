@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-import 'package:salon_vendor/Providers/constants.dart';
+import 'package:extension_vendor/Providers/constants.dart';
 
 import 'http_manager.dart';
 

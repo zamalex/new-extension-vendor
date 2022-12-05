@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:salon_vendor/Providers/constants.dart';
-import 'package:salon_vendor/Screens/Notification/NotificationList.dart';
-import 'package:salon_vendor/Screens/appoinment/appointment_list.dart';
-import 'package:salon_vendor/Screens/order/orders_list.dart';
+import 'package:extension_vendor/Providers/constants.dart';
+import 'package:extension_vendor/Screens/Notification/NotificationList.dart';
+import 'package:extension_vendor/Screens/appoinment/appointment_list.dart';
+import 'package:extension_vendor/Screens/order/orders_list.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -24,7 +24,7 @@ class _HomeState extends State<Home> {
       _selectedIndex = index;
     });
   }
-   final kPrimaryColor = Color.fromRGBO(174, 117, 106, 1);
+   final kPrimaryColor =  Color.fromRGBO(127, 71, 150, 1);
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class _HomeState extends State<Home> {
                //   margin: EdgeInsets.symmetric(horizontal: 5),
                   // padding: EdgeInsets.all(8),
                   decoration:  BoxDecoration(
-                    color: _selectedIndex==0?Color.fromRGBO(174, 117, 106, 1):Colors.transparent,
+                    color: _selectedIndex==0? Color.fromRGBO(127, 71, 150, 1):Colors.transparent,
                     borderRadius:  BorderRadius.circular(20),
                   ),
                   child: _selectedIndex==0?Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,children: [Image.asset(
@@ -76,7 +76,7 @@ class _HomeState extends State<Home> {
                 //  margin: EdgeInsets.symmetric(horizontal: 5),
                   // padding: EdgeInsets.all(8),
                   decoration:  BoxDecoration(
-                    color: _selectedIndex==1?Color.fromRGBO(174, 117, 106, 1):Colors.transparent,
+                    color: _selectedIndex==1? Color.fromRGBO(127, 71, 150, 1):Colors.transparent,
                     borderRadius:  BorderRadius.circular(20),
                   ),
                   child: _selectedIndex==1?Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,children: [Image.asset(
@@ -101,7 +101,7 @@ class _HomeState extends State<Home> {
                  // margin: EdgeInsets.symmetric(horizontal: 5),
                   // padding: EdgeInsets.all(8),
                   decoration:  BoxDecoration(
-                    color: _selectedIndex==2?Color.fromRGBO(174, 117, 106, 1):Colors.transparent,
+                    color: _selectedIndex==2? Color.fromRGBO(127, 71, 150, 1):Colors.transparent,
                     borderRadius:  BorderRadius.circular(20),
                   ),
                   child: _selectedIndex==2?Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,children: [Image.asset(

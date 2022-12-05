@@ -1,14 +1,14 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
-import 'package:salon_vendor/Providers/datetime.dart';
+import 'package:extension_vendor/Providers/datetime.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/widgets.dart';
-import 'package:salon_vendor/Providers/orders_model.dart';
+import 'package:extension_vendor/Providers/orders_model.dart';
 
 
 class PrintInv{

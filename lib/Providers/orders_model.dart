@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:salon_vendor/Providers/http_manager.dart';
+import 'package:extension_vendor/Providers/http_manager.dart';
 
 import 'constants.dart';
 

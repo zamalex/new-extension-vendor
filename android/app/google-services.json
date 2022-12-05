@@ -1,34 +1,42 @@
 {
   "project_info": {
-    "project_number": "229646322414",
-    "project_id": "salon-vendor",
-    "storage_bucket": "salon-vendor.appspot.com"
+    "project_number": "599222127574",
+    "firebase_url": "https://extension-vendor-default-rtdb.firebaseio.com",
+    "project_id": "extension-vendor",
+    "storage_bucket": "extension-vendor.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:229646322414:android:c1a9ff4d686d08e9b601ff",
+        "mobilesdk_app_id": "1:599222127574:android:34ac1604b93f6a03a93277",
         "android_client_info": {
-          "package_name": "com.badee.salonVendor"
+          "package_name": "com.badee.extensionvendor"
         }
       },
       "oauth_client": [
         {
-          "client_id": "229646322414-g6d4ijs6nng03m0vlpde4jipi4j7465h.apps.googleusercontent.com",
+          "client_id": "599222127574-1rcvofh8m4nb9n95ocjoos29n6evm1dg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDicwHi-Vg5ltO1XvzV0Qe4G4Fw1gmrL4k"
+          "current_key": "AIzaSyCn2vYwQwDJocTqLD6NpXrPxSr_yNX_bOU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "229646322414-g6d4ijs6nng03m0vlpde4jipi4j7465h.apps.googleusercontent.com",
+              "client_id": "599222127574-1rcvofh8m4nb9n95ocjoos29n6evm1dg.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "599222127574-7df6vhke7hhaddic8uop9km6l8t3h1t0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.creativitySol.salonVendor"
+              }
             }
           ]
         }

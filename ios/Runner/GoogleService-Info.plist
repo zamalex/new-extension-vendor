@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>229646322414-oplhag47s75pvvb9vknhcopak5fsc7nq.apps.googleusercontent.com</string>
+	<string>599222127574-n42jd80r9p6hpsr8lnnntnvu5oumrag3.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.229646322414-oplhag47s75pvvb9vknhcopak5fsc7nq</string>
+	<string>com.googleusercontent.apps.599222127574-n42jd80r9p6hpsr8lnnntnvu5oumrag3</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCGfOhwbP5w3f521IRfHnu9j3ZnoB5Wxf4</string>
+	<string>AIzaSyDdQB3SH4O-oMYL7BaYVSs6XP0g0SIz4e0</string>
 	<key>GCM_SENDER_ID</key>
-	<string>229646322414</string>
+	<string>599222127574</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.creativitySol.salonVendor</string>
+	<string>com.badee.exvendor</string>
 	<key>PROJECT_ID</key>
-	<string>salon-vendor</string>
+	<string>extension-vendor</string>
 	<key>STORAGE_BUCKET</key>
-	<string>salon-vendor.appspot.com</string>
+	<string>extension-vendor.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:229646322414:ios:c2081f28d457cf97b601ff</string>
+	<string>1:599222127574:ios:f96de2eaa32de9d5a93277</string>
+	<key>DATABASE_URL</key>
+	<string>https://extension-vendor-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>

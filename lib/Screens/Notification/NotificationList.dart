@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:salon_vendor/Providers/notification_model.dart';
-import 'package:salon_vendor/Providers/notifications.dart';
-import 'package:salon_vendor/Widgets/notification_wedgit.dart';
+import 'package:extension_vendor/Providers/notification_model.dart';
+import 'package:extension_vendor/Providers/notifications.dart';
+import 'package:extension_vendor/Widgets/notification_wedgit.dart';
 
 
 class UserNotificationsList extends StatefulWidget {
@@ -100,7 +100,7 @@ class _UserNotificationsListState extends State<UserNotificationsList> {
             fontSize: 14,
           ),
         ),
-        backgroundColor: Color.fromRGBO(174, 117, 106, 1),
+        backgroundColor:  Color.fromRGBO(127, 71, 150, 1),
       ),
       body: !loading
           ? ListView.builder(

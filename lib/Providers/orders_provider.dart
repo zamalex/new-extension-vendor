@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:salon_vendor/Providers/appoinment_model.dart';
-import 'package:salon_vendor/Providers/order_model.dart';
+import 'package:extension_vendor/Providers/appoinment_model.dart';
+import 'package:extension_vendor/Providers/order_model.dart';
 
 import 'orders_model.dart';
 

@@ -7,12 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:new_version/new_version.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:salon_vendor/Providers/constants.dart';
-import 'package:salon_vendor/Providers/loginmodel.dart';
-import 'package:salon_vendor/Screens/home_screen.dart';
-import 'package:salon_vendor/Screens/worker/worker_appointments.dart';
-import 'package:salon_vendor/vendor/text_field.dart';
-import 'package:salon_vendor/vendor/theme_button.dart';
+import 'package:extension_vendor/Providers/constants.dart';
+import 'package:extension_vendor/Providers/loginmodel.dart';
+import 'package:extension_vendor/Screens/home_screen.dart';
+import 'package:extension_vendor/Screens/worker/worker_appointments.dart';
+import 'package:extension_vendor/vendor/text_field.dart';
+import 'package:extension_vendor/vendor/theme_button.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
