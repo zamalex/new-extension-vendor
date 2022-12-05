@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:extension_vendor/Providers/user_model.dart';
 
 class Constants {
-  static const DOMAIN = "http://salon.badee.com.sa/api/v2/";
+  static const DOMAIN = "https://extension.badee.com.sa/api/v2/";
 
   static List<String> STATUSES = [
     'pending',
