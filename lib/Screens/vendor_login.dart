@@ -5,7 +5,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:new_version/new_version.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
+//import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:extension_vendor/Providers/constants.dart';
 import 'package:extension_vendor/Providers/loginmodel.dart';
@@ -194,13 +194,13 @@ class _SignInWidgetState extends State<SignInWidget> with SingleTickerProviderSt
     super.dispose();
   }
 void goHome(String type) async{
-  final status = await OneSignal.shared.getDeviceState();
+  /*final status = await OneSignal.shared.getDeviceState();
   final String osUserID = status.userId;
 
   print('onesignal id $osUserID');
   if(osUserID!=null)
     LoginModel().sendPlayerID(osUserID);
-
+*/
 
   Navigator.pushReplacement(
         context,

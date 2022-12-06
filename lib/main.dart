@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
+//import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:extension_vendor/Providers/constants.dart';
 import 'package:extension_vendor/Providers/orders_provider.dart';
 import 'package:extension_vendor/Screens/appoinment/appointment_list.dart';
@@ -24,7 +24,7 @@ Future<void> main()  async {
   //await Firebase.initializeApp();
 
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
+  /*await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
@@ -60,7 +60,7 @@ Future<void> main()  async {
   OneSignal.shared.setEmailSubscriptionObserver((OSEmailSubscriptionStateChanges emailChanges) {
     // Will be called whenever then user's email subscription changes
     // (ie. OneSignal.setEmail(email) is called and the user gets registered
-  });
+  });*/
 
   runApp(MyApp());
 }
