@@ -2,6 +2,7 @@
 import 'dart:io';
 
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:new_version/new_version.dart';
@@ -201,6 +202,16 @@ void goHome(String type) async{
   if(osUserID!=null)
     LoginModel().sendPlayerID(osUserID);
 */
+  FirebaseMessaging.instance.getToken().then((value) {
+    String token = value;
+
+    if(token!=null){
+      print('onesignal id $token');
+      if(token!=null)
+        LoginModel().sendPlayerID(token);
+    }
+  });
+
 
   Navigator.pushReplacement(
         context,
