@@ -114,11 +114,11 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
               children: [
                 ListTile(
                   contentPadding: EdgeInsets.symmetric(horizontal: 0),
-                  leading: CircleAvatar(
+                  leading: /*CircleAvatar(
                     child: ClipRRect(child: Image.asset('assets/images/welcome.png'),borderRadius: BorderRadius.circular(50),),
                     backgroundColor: Colors.grey,
                     radius: 30,
-                  ),
+                  )*/Icon(Icons.person,color: Constants.kPrimaryColor,),
                   title: Text(
                     widget.order.user_name,
                     style: TextStyle(color: Colors.black),
@@ -307,11 +307,11 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
                 ),
               if(widget.order.booking_staff_name!=null)  ListTile(
                   contentPadding: EdgeInsets.symmetric(horizontal: 0),
-                  leading: CircleAvatar(
+                  /*leading: CircleAvatar(
                     child: ClipRRect(child: Image.asset('assets/images/welcome.png'),borderRadius: BorderRadius.circular(50),),
                     backgroundColor: Colors.grey,
                     radius: 30,
-                  ),
+                  ),*/
                   title: Text(
                     '${widget.order.booking_staff_name}',
                     style: TextStyle(color: Colors.black),

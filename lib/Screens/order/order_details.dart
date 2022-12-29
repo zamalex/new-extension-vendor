@@ -104,11 +104,11 @@ class _OrderDetailsState extends State<OrderDetails> {
               children: [
                 ListTile(
                   contentPadding: EdgeInsets.symmetric(horizontal: 0),
-                  leading: CircleAvatar(
+                  leading: /*CircleAvatar(
                     child: ClipRRect(child: Image.asset('assets/images/welcome.png'),borderRadius: BorderRadius.circular(50),),
                     backgroundColor: Colors.grey,
                     radius: 30,
-                  ),
+                  )*/Icon(Icons.person,color: Constants.kPrimaryColor,),
                   title: Text(
                     widget.order.user_name,
                     style: TextStyle(color: Colors.black),
@@ -377,7 +377,8 @@ class _OrderDetailsState extends State<OrderDetails> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            e.productName,
+
+                        '${e.quantity}x ${e.productName}',
                             style: TextStyle(color: Colors.black),
                           ),
                           Text(
@@ -418,7 +419,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                 SizedBox(
                   height: 10,
                 ),
-                Row(
+                /*Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
@@ -433,7 +434,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                 ),
                 SizedBox(
                   height: 10,
-                ),
+                ),*/
                 Divider(
                   color: Colors.grey,
                 ),
