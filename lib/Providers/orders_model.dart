@@ -190,6 +190,7 @@ class Data {
   String deliveryStatus;
   String deliveryStatusString;
   String grandTotal;
+  String coupon_discount;
   String date;
   String booking_status;
   bool cancelRequest;
@@ -213,6 +214,7 @@ class Data {
         this.deliveryStatus,
         this.deliveryStatusString,
         this.grandTotal,
+        this.coupon_discount,
         this.date,
         this.cancelRequest,
         this.canCancel,
@@ -233,6 +235,7 @@ class Data {
     deliveryStatus = json['delivery_status']as String;
     deliveryStatusString = json['delivery_status_string']as String;
     grandTotal = json['grand_total']as String;
+    coupon_discount = json['coupon_discount']as String;
     tax = json['tax']as String;
     user_name = json['user_name']as String;
     user_phone = json['user_phone']as String;

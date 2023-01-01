@@ -395,7 +395,7 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Total price',
+                      'Subtotal price',
                       style: TextStyle(color: Colors.black),
                     ),
                     Text(
@@ -404,6 +404,24 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
                     ),
                   ],
                 ),
+                SizedBox(
+                  height: 10,
+                ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Discount',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    Text(
+                      '${widget.order.coupon_discount} SAR',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ],
+                ),
+
                 SizedBox(
                   height: 10,
                 ),
