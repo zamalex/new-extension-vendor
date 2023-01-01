@@ -412,7 +412,7 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Discount',
+                      'Coupon Discount',
                       style: TextStyle(color: Colors.black),
                     ),
                     Text(
@@ -422,6 +422,24 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
                   ],
                 ),
 
+
+                SizedBox(
+                  height: 10,
+                ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Balance Discount',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    Text(
+                      '${widget.order.balance} SAR',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ],
+                ),
                 SizedBox(
                   height: 10,
                 ),

@@ -424,11 +424,29 @@ class _OrderDetailsState extends State<OrderDetails> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Discount',
+                      'Coupon Discount',
                       style: TextStyle(color: Colors.black),
                     ),
                     Text(
                       '${widget.order.coupon_discount} SAR',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ],
+                ),
+
+                SizedBox(
+                  height: 10,
+                ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Balance Discount',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    Text(
+                      '${widget.order.balance} SAR',
                       style: TextStyle(color: Colors.black),
                     ),
                   ],
