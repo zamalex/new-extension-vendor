@@ -48,18 +48,6 @@ class UserNotificationWedgit extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                  padding: const EdgeInsets.only(right: 15.0, left: 15, top: 10),
-                child: Text(
-                  item.title??'',
-                  style: TextStyle(
-                    color: Color.fromRGBO(26, 26, 26, 1),
-                    fontFamily: "Almarai",
-                    fontWeight: FontWeight.normal,
-                    fontSize: 14,
-                  ),
-                ),
-              ),
             ]),
             ),
             Padding(

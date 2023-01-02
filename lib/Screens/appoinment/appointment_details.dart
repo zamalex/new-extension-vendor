@@ -399,7 +399,7 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
                       style: TextStyle(color: Colors.black),
                     ),
                     Text(
-                      '${widget.order.grandTotal} SAR',
+                      '${widget.order.subtotal} SAR',
                       style: TextStyle(color: Colors.black),
                     ),
                   ],

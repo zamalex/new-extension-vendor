@@ -411,7 +411,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                       style: TextStyle(color: Colors.black),
                     ),
                     Text(
-                      '${widget.order.grandTotal} SAR',
+                      '${widget.order.subtotal} SAR',
                       style: TextStyle(color: Colors.black),
                     ),
                   ],

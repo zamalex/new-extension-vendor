@@ -21,6 +21,7 @@ class PrintInv{
 
 
 
+
     final invoice = Invoice(
       invoiceNumber: data.code,
       products: products,
@@ -34,7 +35,7 @@ class PrintInv{
       accentColor: PdfColors.blueGrey900,
     );
 
-    return await invoice.buildPdf(pageFormat);
+    return await invoice.buildPdf(pageFormat,data);
   }
 }
 
@@ -77,7 +78,7 @@ class Invoice {
 
  // String? _bgShape;
 
-  Future<Uint8List> buildPdf(PdfPageFormat pageFormat) async {
+  Future<Uint8List> buildPdf(PdfPageFormat pageFormat,Data data) async {
     // Create a PDF document.
     final doc = pw.Document();
 
@@ -96,10 +97,10 @@ class Invoice {
         header: _buildHeader,
         footer: _buildFooter,
         build: (context) => [
-          _contentHeader(context),
+          _contentHeader(context,data),
           if(products.length>0)_contentTable(context),
           pw.SizedBox(height: 20),
-          _contentFooter(context),
+          _contentFooter(context,data),
           pw.SizedBox(height: 20),
           _termsAndConditions(context),
         ],
@@ -237,7 +238,7 @@ class Invoice {
     );
   }
 
-  pw.Widget _contentHeader(pw.Context context) {
+  pw.Widget _contentHeader(pw.Context context,Data data) {
     return pw.Row(
       crossAxisAlignment: pw.CrossAxisAlignment.start,
       children: [
@@ -247,7 +248,7 @@ class Invoice {
             height: 70,
             child: pw.FittedBox(
               child: pw.Text(
-                'Total: ${_formatCurrency(_grandTotal)}',
+                'Total: ${data.grandTotal} SAR',
                 style: pw.TextStyle(
                   color: baseColor,
                   fontStyle: pw.FontStyle.italic,
@@ -306,7 +307,7 @@ class Invoice {
     );
   }
 
-  pw.Widget _contentFooter(pw.Context context) {
+  pw.Widget _contentFooter(pw.Context context,Data data) {
     return pw.Row(
       crossAxisAlignment: pw.CrossAxisAlignment.start,
       children: [
@@ -357,7 +358,21 @@ class Invoice {
                   mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                   children: [
                     pw.Text('Sub Total:'),
-                    pw.Text(_formatCurrency(_total)),
+                    pw.Text('${data.subtotal} SAR'),
+                  ],
+                ),
+                pw.Row(
+                  mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                  children: [
+                    pw.Text('Coupon Discount:'),
+                    pw.Text('${data.coupon_discount} SAR'),
+                  ],
+                ),
+                pw.Row(
+                  mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                  children: [
+                    pw.Text('Balance Discount:'),
+                    pw.Text('${data.balance} SAR'),
                   ],
                 ),
                 pw.SizedBox(height: 5),
@@ -379,7 +394,7 @@ class Invoice {
                     mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                     children: [
                       pw.Text('Total:'),
-                      pw.Text(_formatCurrency(_grandTotal)),
+                      pw.Text('${data.grandTotal} SAR'),
                     ],
                   ),
                 ),
