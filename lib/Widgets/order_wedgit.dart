@@ -51,7 +51,7 @@ class OrderWedgit extends StatelessWidget {
                     padding:
                         const EdgeInsets.only(right: 15.0, left: 15, top: 10),
                     child: Text(
-                      order.grandTotal,
+                      '${order.grandTotal} SAR',
                       style: TextStyle(
                         color: Color.fromRGBO(26, 26, 26, 1),
                         fontFamily: "Almarai",
