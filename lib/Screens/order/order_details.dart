@@ -394,6 +394,23 @@ class _OrderDetailsState extends State<OrderDetails> {
                   height: 10,
                 ),
                 Text(
+                  'Notes',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+    Text(
+    '${widget.order.notes}',
+    style: TextStyle(color: Colors.black),
+    ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
                   'Order summary',
                   style: TextStyle(
                       color: Colors.black,

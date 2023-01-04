@@ -11,6 +11,7 @@ class Constants {
   ];
   static List<String> STAFF_STATUSES = [
     'pending',
+    'confirmed',
   'active'
     ,'finished',
   ];

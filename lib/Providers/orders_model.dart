@@ -194,6 +194,7 @@ class Data {
   String coupon_discount;
   String balance;
   String date;
+  String notes;
   String booking_status;
   bool cancelRequest;
   bool canCancel;
@@ -222,6 +223,7 @@ class Data {
         this.date,
         this.cancelRequest,
         this.canCancel,
+        this.notes,
         this.shop,
         this.items});
 
@@ -243,6 +245,7 @@ class Data {
     coupon_discount = json['coupon_discount']as String;
     balance = json['balance_discount']==null?"0.00":json['balance_discount']as String;
     tax = json['tax']as String;
+    notes = json['notes']==null?'----':json['notes'] as String;
     user_name = json['user_name']as String;
     user_phone = json['user_phone']as String;
     user_address = json['user_address']as String??'';
