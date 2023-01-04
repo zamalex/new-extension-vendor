@@ -37,7 +37,7 @@ class OrderWedgit extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.only(right: 15.0, left: 15),
                       child: Text(
-                        order.id.toString(),
+                        order.code,
                         style: TextStyle(
                           color: Color.fromRGBO(26, 26, 26, 1),
                           fontFamily: "Almarai",

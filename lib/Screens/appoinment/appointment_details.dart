@@ -188,7 +188,7 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
                 ),
                 _iconText(
                     'assets/images/Document@3x.png',
-                    'Order no. ${widget.order.id}'),
+                    'Order no. ${widget.order.code}'),
                 SizedBox(
                   height: 10,
                 ),

@@ -174,7 +174,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                 ),
                 _iconText(
                     'assets/images/Document@3x.png',
-                    'Order no. ${widget.order.id}'),
+                    'Order no. ${widget.order.code}'),
                 SizedBox(
                   height: 10,
                 ),

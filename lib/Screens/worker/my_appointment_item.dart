@@ -114,7 +114,7 @@ class _MyAppointmentItemState extends State<MyAppointmentItem> {
                     child: Padding(
                       padding: const EdgeInsets.only(right: 15.0, left: 15),
                       child: Text(
-                        widget.order.id.toString(),
+                        widget.order.code,
                         style: TextStyle(
                           color: Color.fromRGBO(26, 26, 26, 1),
                           fontFamily: "Almarai",
