@@ -3,7 +3,7 @@ import 'package:extension_vendor/Providers/user_model.dart';
 
 class Constants {
   static const DOMAIN = "https://extension.badee.com.sa/api/v2/";
-
+  static String LOCALE = 'ar';
   static List<String> STATUSES = [
     'pending',
   'active'

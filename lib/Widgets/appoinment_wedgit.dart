@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:extension_vendor/Widgets/seperator_wedgit.dart';
 
@@ -26,7 +27,7 @@ class OrderWedgit extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 15, left: 15.0, right: 15),
               child: Text(
-                status,
+                status.tr(),
                 style: TextStyle(
                   color: Color.fromRGBO(26, 26, 26, 1),
                   fontFamily: "Almarai",

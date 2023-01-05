@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:extension_vendor/Providers/notification_model.dart';
 import 'package:extension_vendor/Providers/notifications.dart';
@@ -93,7 +94,7 @@ class _UserNotificationsListState extends State<UserNotificationsList> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Notifications',
+          'Notifications'.tr(),
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
@@ -35,7 +36,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                 Navigator.of(context).pop();
                 changeStatus(Constants.STATUSES_ORDER[index]);
               },
-              child: Container(margin: EdgeInsets.all(5),child: Text(Constants.STATUSES_ORDER[index],style: TextStyle(fontSize: 18),))),
+              child: Container(margin: EdgeInsets.all(5),child: Text(Constants.STATUSES_ORDER[index].tr()/*=='finished'?'completed':Constants.STATUSES_ORDER[index]*/,style: TextStyle(fontSize: 18),))),
           Divider()
         ],
       )),
@@ -84,7 +85,7 @@ class _OrderDetailsState extends State<OrderDetails> {
         backgroundColor: const  Color.fromRGBO(127, 71, 150, 1),
         iconTheme: const IconThemeData(color: Colors.white),
         title: Text(
-          'Order Details',
+          'Order Details'.tr(),
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -114,7 +115,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     style: TextStyle(color: Colors.black),
                   ),
                   subtitle: Text(
-                    'Saudi Arabia',
+                    'Saudi Arabia'.tr(),
                     style: TextStyle(color: mGrey),
                   ),
                 ),
@@ -155,7 +156,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                 ),
                 _iconText(
                     'assets/images/Call@3x.png',
-                    'Phone number'),
+                    'Phone number'.tr()),
                 SizedBox(
                   height: 5,
                 ),
@@ -174,7 +175,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                 ),
                 _iconText(
                     'assets/images/Document@3x.png',
-                    'Order no. ${widget.order.code}'),
+                    '${'Order no.'.tr()} ${widget.order.code}'),
                 SizedBox(
                   height: 10,
                 ),
@@ -328,14 +329,14 @@ class _OrderDetailsState extends State<OrderDetails> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '${widget.order.deliveryStatus=='on_the_way'?'on the way':widget.order.deliveryStatus}',
+                      '${widget.order.deliveryStatus.tr()/*=='on_the_way'?'on the way':widget.order.deliveryStatus*/}',
                       style: TextStyle(color: mYellow),
                     ),
                     RichText(
                         text: TextSpan(
                       children: <TextSpan>[
                         TextSpan(
-                            text: ' Ordered by',
+                            text: ' Ordered by'.tr(),
                             style: TextStyle(color: mYellow)),
                         TextSpan(
                             text: DateTime.parse(
@@ -350,7 +351,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                   height: 20,
                 ),
                 Text(
-                  'Payment Method',
+                  'Payment Method'.tr(),
                   style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -382,7 +383,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                             style: TextStyle(color: Colors.black),
                           ),
                           Text(
-                            '${e.price} SAR',
+                            '${e.price} ${'SAR'.tr()}',
                             style: TextStyle(color: Colors.black),
                           ),
                         ],
@@ -394,7 +395,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                   height: 10,
                 ),
                 Text(
-                  'Notes',
+                  'Notes'.tr(),
                   style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -411,7 +412,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                   height: 10,
                 ),
                 Text(
-                  'Order summary',
+                  'Order summary'.tr(),
                   style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -424,11 +425,11 @@ class _OrderDetailsState extends State<OrderDetails> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Subtotal price',
+                      'Subtotal price'.tr(),
                       style: TextStyle(color: Colors.black),
                     ),
                     Text(
-                      '${widget.order.subtotal} SAR',
+                      '${widget.order.subtotal} ${'SAR'.tr()}',
                       style: TextStyle(color: Colors.black),
                     ),
                   ],
@@ -441,11 +442,11 @@ class _OrderDetailsState extends State<OrderDetails> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Coupon Discount',
+                      'Coupon Discount'.tr(),
                       style: TextStyle(color: Colors.black),
                     ),
                     Text(
-                      '${widget.order.coupon_discount} SAR',
+                      '${widget.order.coupon_discount} ${'SAR'.tr()}',
                       style: TextStyle(color: Colors.black),
                     ),
                   ],
@@ -459,11 +460,11 @@ class _OrderDetailsState extends State<OrderDetails> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Balance Discount',
+                      'Balance Discount'.tr(),
                       style: TextStyle(color: Colors.black),
                     ),
                     Text(
-                      '${widget.order.balance} SAR',
+                      '${widget.order.balance} ${'SAR'.tr()}',
                       style: TextStyle(color: Colors.black),
                     ),
                   ],
@@ -498,12 +499,12 @@ class _OrderDetailsState extends State<OrderDetails> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Total',
+                      'Total'.tr(),
                       style: TextStyle(
                           color: Colors.black, fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      '${widget.order.grandTotal} SAR',
+                      '${widget.order.grandTotal} ${'SAR'.tr()}',
                       style: TextStyle(
                           color: Colors.black, fontWeight: FontWeight.bold),
                     ),
@@ -524,7 +525,7 @@ class _OrderDetailsState extends State<OrderDetails> {
 
                         },
                         child: Text(
-                          'Print Invoice',
+                          'Print Invoice'.tr(),
                           style: TextStyle(color: mGrey),
                         ),
                         style: ButtonStyle(
@@ -546,7 +547,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                       child: ElevatedButton(
                         onPressed: (){/*changeStatus(widget.order.deliveryStatus);*/showStatusesDialog(context);},
                         child: Text(
-                          'Change Status',
+                          'Change Status'.tr(),
                           style: TextStyle(color: Colors.white),
                         ),
                         style: ButtonStyle(

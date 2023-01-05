@@ -1,7 +1,8 @@
 //import 'package:firebase_core/firebase_core.dart';
 //import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'dart:io';
-
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -35,6 +36,7 @@ Future<void> main()  async {
   //await Firebase.initializeApp();
 
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -98,7 +100,11 @@ Future<void> main()  async {
     // (ie. OneSignal.setEmail(email) is called and the user gets registered
   });*/
 
-  runApp(MyApp());
+  runApp(EasyLocalization(
+      supportedLocales: [Locale('ar', ''), Locale('en', '')],
+      path: 'assets/translations', // <-- change the path of the translation files
+      fallbackLocale: Locale('en', ''),
+      child: MyApp()  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -185,15 +191,9 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
    return MaterialApp(
-        // localizationsDelegates: [
-        //   GlobalMaterialLocalizations.delegate,
-        //   GlobalWidgetsLocalizations.delegate,
-        //   GlobalCupertinoLocalizations.delegate,
-        // ],
-        // supportedLocales: [
-        //   const Locale('ar', 'AE'), // Arabic, no country code
-        // ],
-        // locale: Locale("ar", "AE"),
+       localizationsDelegates: context.localizationDelegates,
+       supportedLocales: context.supportedLocales,
+       locale: context.locale,
         title: 'Flutter Demo',
         theme: ThemeData(
           fontFamily: 'Almarai',

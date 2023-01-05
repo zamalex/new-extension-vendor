@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -36,7 +37,7 @@ class _MyAppointmentItemState extends State<MyAppointmentItem> {
                 Navigator.of(context).pop();
                 changeStatus(Constants.STATUSES[index]);
               },
-              child: Container(margin: EdgeInsets.all(5),child: Text(Constants.STATUSES[index],style: TextStyle(fontSize: 18),))),
+              child: Container(margin: EdgeInsets.all(5),child: Text(Constants.STATUSES[index].tr()/*=='finished'?'completed':Constants.STATUSES[index]*/,style: TextStyle(fontSize: 18),))),
           Divider()
         ],
       )),
@@ -128,7 +129,7 @@ class _MyAppointmentItemState extends State<MyAppointmentItem> {
                     padding:
                     const EdgeInsets.only(right: 15.0, left: 15, top: 10),
                     child: Text(
-                      '${widget.order.grandTotal} SAR',
+                      '${widget.order.grandTotal} ${'SAR'.tr()}',
                       style: TextStyle(
                         color: Color.fromRGBO(26, 26, 26, 1),
                         fontFamily: "Almarai",
@@ -211,7 +212,7 @@ class _MyAppointmentItemState extends State<MyAppointmentItem> {
                       padding: const EdgeInsets.only(
                           top: 5, left: 15, right: 14, bottom: 7),
                       child: Text(
-                        widget.order.deliveryStatus=='on_the_way'?'active':widget.order.deliveryStatus,
+                        widget.order.deliveryStatus.tr(),//=='on_the_way'?'active':widget.order.deliveryStatus,
                         textAlign: TextAlign.right,
                         style: TextStyle(
                           color: Color.fromRGBO(255, 255, 255, 1),
@@ -244,7 +245,7 @@ class _MyAppointmentItemState extends State<MyAppointmentItem> {
                               //Provider.of<OrdersProvider>(context, listen: false).acceptRegectAppointment('Rejected', widget.order.id.toString());
                             },
                             child: Text(
-                              'View',
+                              'View'.tr(),
                               style: TextStyle(color: mGrey),
                             ),
                             style: ButtonStyle(
@@ -269,7 +270,7 @@ class _MyAppointmentItemState extends State<MyAppointmentItem> {
                               showStatusesDialog(context);
                             },
                             child: Text(
-                              'Change Status',
+                              'Change Status'.tr(),
                               style: TextStyle(color: Colors.white),
                             ),
                             style: ButtonStyle(

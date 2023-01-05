@@ -1,0 +1,39 @@
+{
+
+  "ar": "العربية",
+  "en": "English",
+  "Appointments": "الحجوزات",
+  "Orders": "الطلبات",
+  "Notifications": "الاشعارات",
+  "Logout":"تسجيل خروج",
+
+
+  "pending":"قيد الانتظار",
+  "confirmed":"تم التأكيد",
+  "active":"قيد التنفيذ",
+  "on_the_way":"قيد التنفيذ",
+  "processing": "قيد التنفيذ",
+  "finished":"مكتمل",
+  "delivered":"مكتمل",
+  "completed":"مكتمل",
+  "Appointment Details":"تفاصيل الحجز",
+  "Saudi Arabia":"السعودية",
+  "Phone number":"رقم الجوال",
+  "Order no.":"رقم الطلب.",
+  "Salon staff":"العامل",
+  "SAR":"ر.س",
+  "Notes":"ملاحظات",
+  "Payment Method":"طريقة الدفع",
+  "Order summary":"ملخص الطلب",
+  "Subtotal price":"الاجمالي",
+  "Coupon Discount":"خصم كوبون",
+  "Balance Discount":"مدفوع بالرصيد",
+  "Total":"الاجمالي",
+  "View":"عرض",
+  "Print Invoice":"طباعة الفاتورة",
+  "Change Status":"تغيير الحالة",
+  "Order Details":"تفاصيل الطلب",
+  " Ordered by":"الطلب في ",
+  " Booked by":"الحجز في "
+
+}

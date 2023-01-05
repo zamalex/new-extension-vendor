@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:extension_vendor/Providers/appoinment_model.dart';
@@ -134,7 +135,7 @@ class _OrderListState extends State<OrderList> {
       appBar: AppBar(
         backgroundColor:  Color.fromRGBO(127, 71, 150, 1),
         title: Text(
-          'Orders',
+          'Orders'.tr(),
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,

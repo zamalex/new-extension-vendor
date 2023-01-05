@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:easy_localization/easy_localization.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +14,7 @@ import 'package:extension_vendor/Widgets/notification_wedgit.dart';
 import 'package:extension_vendor/Widgets/order_wedgit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../Widgets/change_locale_dialog.dart';
 import 'my_appointment_item.dart';
 
 class WorkerAppointmentsList extends StatefulWidget {
@@ -69,11 +71,47 @@ class _WorkerAppointmentsListState extends State<WorkerAppointmentsList> {
 
   }
 
+  void showLanguageDialog() {
+    showGeneralDialog(
+      barrierLabel: "Barrier",
+      barrierDismissible: true,
+      barrierColor: Colors.black.withOpacity(0.5),
+      transitionDuration: Duration(milliseconds: 300),
+      context: context,
+      pageBuilder: (_, __, ___) {
+        return Align(
+          alignment: Alignment.center,
+          child: Container(
+            // height: 220,
+            child: ChangeLocaleDoialog(),
+            margin: EdgeInsets.only(bottom: 50, left: 12, right: 12),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(5),
+            ),
+          ),
+        );
+      },
+      transitionBuilder: (_, anim, __, child) {
+        return SlideTransition(
+          position: Tween(begin: Offset(0, 1), end: Offset(0, 0)).animate(anim),
+          child: child,
+        );
+      },
+    ).then((value){
+      setState(() {
+
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         actions: [
+          InkWell(child: Icon(Icons.language,color: Colors.white,),onTap: showLanguageDialog,),
+
           InkWell(
             onTap: () async {
               SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -89,7 +127,7 @@ class _WorkerAppointmentsListState extends State<WorkerAppointmentsList> {
               child: Container(
                 margin: EdgeInsets.symmetric(horizontal: 10),
                 child: Text(
-                  'Logout',
+                  'Logout'.tr(),
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -99,10 +137,11 @@ class _WorkerAppointmentsListState extends State<WorkerAppointmentsList> {
                 ),
               ),
             ),
-          )
+          ),
+
         ],
         title: Text(
-          'Appointments',
+          'Appointments'.tr(),
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,

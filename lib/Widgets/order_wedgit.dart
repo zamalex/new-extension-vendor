@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:extension_vendor/Providers/orders_model.dart';
@@ -51,7 +52,7 @@ class OrderWedgit extends StatelessWidget {
                     padding:
                         const EdgeInsets.only(right: 15.0, left: 15, top: 10),
                     child: Text(
-                      '${order.grandTotal} SAR',
+                      '${order.grandTotal} ${'SAR'.tr()}',
                       style: TextStyle(
                         color: Color.fromRGBO(26, 26, 26, 1),
                         fontFamily: "Almarai",
@@ -124,7 +125,7 @@ class OrderWedgit extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           top: 5, left: 15, right: 14, bottom: 7),
                       child: Text(
-                        order.deliveryStatus,
+                        order.deliveryStatus.tr(),
                         textAlign: TextAlign.right,
                         style: TextStyle(
                           color: Color.fromRGBO(255, 255, 255, 1),

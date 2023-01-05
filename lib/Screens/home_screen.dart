@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:extension_vendor/Providers/constants.dart';
@@ -59,7 +60,7 @@ class _HomeState extends State<Home> {
                     height: 20,
                     color: _selectedIndex==0?Colors.white:kPrimaryColor,
 
-                  ),Text('Appointments',style:TextStyle(color: Colors.white),)],):Image.asset(
+                  ),Text('Appointments'.tr(),style:TextStyle(color: Colors.white),)],):Image.asset(
                     'assets/images/Calendar Selected@3x.png',
                     width: 20,
                     height: 20,
@@ -85,7 +86,7 @@ class _HomeState extends State<Home> {
                     height: 20,
                     color: _selectedIndex==1?Colors.white:kPrimaryColor,
 
-                  ),Text('Orders',style:TextStyle(color: Colors.white),)],):Image.asset(
+                  ),Text('Orders'.tr(),style:TextStyle(color: Colors.white),)],):Image.asset(
                     'assets/images/Buy@3x.png',
                     width: 20,
                     height: 20,
@@ -110,7 +111,7 @@ class _HomeState extends State<Home> {
                     height: 20,
                     color: _selectedIndex==2?Colors.white:kPrimaryColor,
 
-                  ),Text('Notifications',style:TextStyle(color: Colors.white),)],):Image.asset(
+                  ),Text('Notifications'.tr(),style:TextStyle(color: Colors.white),)],):Image.asset(
                     'assets/images/Notification@3x.png',
                     width: 20,
                     height: 20,

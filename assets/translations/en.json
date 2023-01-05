@@ -1,0 +1,37 @@
+{
+  "ar": "العربية",
+  "en": "English",
+  "Appointments": "Appointments",
+  "Orders": "Orders",
+  "Notifications": "Notifications",
+  "Logout":"Logout",
+
+
+  "pending":"pending",
+  "confirmed":"confirmed",
+  "active":"processing",
+  "on_the_way":"processing",
+  "processing": "processing",
+  "finished":"completed",
+  "delivered":"completed",
+  "completed":"completed",
+  "Appointment Details":"Appointment Details",
+  "Saudi Arabia":"Saudi Arabia",
+  "Phone number":"Phone number",
+  "Order no.":"Order no.",
+  "Salon staff":"Salon staff",
+  "SAR":"SAR",
+  "Notes":"Notes",
+  "Payment Method":"Payment Method",
+  "Order summary":"Order summary",
+  "Subtotal price":"Subtotal price",
+  "Coupon Discount":"Coupon Discount",
+  "Balance Discount":"Balance Discount",
+  "Total":"Total",
+  "Print Invoice":"Print Invoice",
+  "Change Status":"Change Status",
+  "Order Details":"Order Details",
+  " Ordered by":" Ordered by",
+  " Booked by":" Booked by"
+
+}
